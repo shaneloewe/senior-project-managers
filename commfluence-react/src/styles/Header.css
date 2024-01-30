@@ -1,5 +1,5 @@
 /* Header.css */
-header {
+.header {
     background-color: white;
     color: white;
     padding: 1rem;
@@ -10,11 +10,6 @@ header {
 
 h1 {
     color: #0079FF;
-    margin: 0;
-}
-
-nav {
-    margin-top: 1rem;
 }
 
 ul {
@@ -23,12 +18,23 @@ ul {
     display: flex;
 }
 
-li {
+.nav-items a {
     margin-right: 1rem;
-}
-
-.nav-items {
     text-decoration: none;
     color: #0079FF;
     font-weight: bold;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.nav-items a:hover {
+    margin-right: 1rem;
+    text-decoration: none;
+    color: #0079FF;
+    transform: scale(1.2) translate(-0%, -0%);
+    font-weight: bold;
+}
+
+.nav-items a:visited {
+    color: #0079FF;
 }

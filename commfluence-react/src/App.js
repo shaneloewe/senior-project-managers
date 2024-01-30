@@ -1,17 +1,22 @@
-import './App.css';
 import React from "react";
-import Header from "./Header";
-import './LandingPage.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import "./styles/Header.css";
+import Header from "./components/Header";
+import Home from "./components/HomeContent";
 
-
-function App() {
-  return (
-
-    <div className="App">
+const App = () => (
+  <div>
+    <Router>
       <Header />
-      <h2>Let's get<br></br>started</h2>
-    </div>
-  );
-}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
+  </div>
+);
 
 export default App;
