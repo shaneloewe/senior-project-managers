@@ -10,6 +10,24 @@ h2 {
     animation-fill-mode: forwards;
 }
 
+.about-text {
+    color: #777777;
+    text-align: left;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 1rem;
+    font-size: 20px;
+}
+
+.contact-text {
+    color: #777777;
+    text-align: center;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 1rem;
+    font-size: 20px;
+}
+
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;
