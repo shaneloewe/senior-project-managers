@@ -17,6 +17,11 @@ h2 {
     margin-right: 150px;
     padding: 1rem;
     font-size: 20px;
+    opacity: 0;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
 }
 
 .contact-text {
@@ -26,9 +31,24 @@ h2 {
     margin-right: 150px;
     padding: 1rem;
     font-size: 20px;
+    opacity: 0;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
 }
 
 @keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInAnimation_bodytext {
     0% {
         opacity: 0;
     }
