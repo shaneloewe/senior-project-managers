@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css'; // import styles
 
-const DocumentEditor = ({ onContentChange }) => {
+const DocumentEditor = ({ onContentChange, initialContent }) => {
   const quillRef = useRef(null);
 
   useEffect(() => {
@@ -13,10 +13,15 @@ const DocumentEditor = ({ onContentChange }) => {
       },
     });
 
+    // Set initial content if present
+    if (initialContent) {
+      quillInstance.setContents(initialContent);
+    }
+
     quillInstance.on('text-change', () => {
       onContentChange(quillInstance.getContents());
     });
-  }, [onContentChange]);
+  }, [onContentChange, initialContent]);
 
   return <div ref={quillRef} />;
 };

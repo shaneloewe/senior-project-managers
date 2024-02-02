@@ -1,0 +1,31 @@
+/* DocumentPage.css */
+
+.create-document-button {
+    background-color: grey;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    margin: 10px 0;
+  }
+  
+  .document-item {
+    background-color: blue;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    margin: 10px 0;
+  
+  }
+  
