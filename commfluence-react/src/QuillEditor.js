@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css'; // Import Quill stylesheet
+import './QuillEditor.css'; 
 
 const QuillEditor = ({ content, onSave }) => {
   const quillRef = useRef(null);
@@ -32,9 +33,9 @@ const QuillEditor = ({ content, onSave }) => {
   };
 
   return (
-    <div>
-      <div ref={quillRef} />
-      <button onClick={handleSave}>Save Document</button>
+    <div className="quillEditorContainer">
+      <div ref={quillRef} className="quillEditorContent" />
+      <button onClick={handleSave} className="saveButton">Save Document</button>
     </div>
   );
 };
