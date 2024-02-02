@@ -15,7 +15,7 @@ function App() {
       <Header />
       <Authentication />
       <AuthDetails/>
-      <h2>Let's get<br></br>started</h2>
+      <h2><br></br></h2>
       
     </div>
   );
