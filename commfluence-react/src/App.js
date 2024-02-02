@@ -6,6 +6,7 @@ import "./styles/Header.css";
 import Header from "./components/Header";
 import Home from "./components/HomeContent";
 
+
 const App = () => (
   <div>
     <Router>
