@@ -36,7 +36,7 @@ const Authentication = () => {
     return (
         <div className='authentication-container'>
             <div className='authentication-box'>
-                <h2>{isLogin ? 'Log In' : 'Create Account'}</h2>
+                <h2>{isLogin ? 'Lets Get Writing' : 'Create Account'}</h2>
                 <form onSubmit={handleAuthAction}>
                     <div className='form-group'>
                         <label>Email:</label>
