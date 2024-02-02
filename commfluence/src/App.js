@@ -4,8 +4,8 @@ import Header from "./Header";
 import './LandingPage.css';
 //import SignIn from './components/auth/SignIn';
 //import SignUp from './components/auth/SignUp';
-import Authentication from './components/auth/Authentication';
-import AuthDetails from './components/auth/AuthDetails';
+import Authentication from '../../commfluence-react/src/components/auth/Authentication';
+import AuthDetails from '../../commfluence-react/src/components/auth/AuthDetails';
 
 
 function App() {
