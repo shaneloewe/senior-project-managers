@@ -2,6 +2,10 @@ import './App.css';
 import React from "react";
 import Header from "./Header";
 import './LandingPage.css';
+//import SignIn from './components/auth/SignIn';
+//import SignUp from './components/auth/SignUp';
+import Authentication from '../../commfluence-react/src/components/auth/Authentication';
+import AuthDetails from '../../commfluence-react/src/components/auth/AuthDetails';
 
 
 function App() {
@@ -9,7 +13,10 @@ function App() {
 
     <div className="App">
       <Header />
-      <h2>Let's get<br></br>started</h2>
+      <Authentication />
+      <AuthDetails/>
+      <h2><br></br></h2>
+      
     </div>
   );
 }
