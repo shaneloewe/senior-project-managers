@@ -1,31 +1,159 @@
 /* DocumentPage.css */
 
+.banner-container {
+  display: flex;
+  align-items: center;
+  /* Center items vertically */
+}
+
+.back-button {
+  position: relative;
+  width: 100px;
+  height: 83px;
+  /* Set height to 100% to match the height of banners */
+  background-color: #0079FF;
+  /* Background color */
+  display: flex;
+  /* Make it a block-level element to set width and height */
+  margin-right: 0;
+  /* Adjust margin as needed */
+  margin-left: -20px;
+  /* Negative margin to overlap with the first banner */
+  outline: none;
+  /* Remove default focus outline */
+}
+
+.banner {
+  /* Expand to fill available space */
+  background-color: #0079FF;
+  /* Background color of the banner */
+  color: white;
+  /* Text color */
+  padding: 20px;
+  /* Adjust as needed */
+  margin: 0;
+  /* Remove default margin */
+  width: 64%;
+}
+
+.taskboard {
+  flex: 1;
+  /* Expand to fill available space */
+  background-color: #0079FF;
+  /* Background color of the banner */
+  color: white;
+  /* Text color */
+  padding: 20px;
+  /* Adjust as needed */
+  margin: 0;
+  /* Remove default margin */
+}
+
+.spacer {
+  width: 20px;
+  /* Adjust as needed to create desired separation */
+}
+
+.page-title {
+  padding: 1rem;
+  margin-left: 84px;
+  width: 64%
+}
+
+body {
+  overflow-x: hidden;
+}
+
 .create-document-button {
-    background-color: grey;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    margin: 10px 0;
-  }
-  
-  .document-item {
-    background-color: blue;
-    color: black;
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    margin: 10px 0;
-  
-  }
-  
+  width: 212px;
+  /* 8.5 inches */
+  height: 275px;
+  /* 11 inches */
+  background-color: #777777;
+  /* Background color */
+  color: white;
+  /* Text color */
+  padding: 10px;
+  /* Adjust padding as needed */
+  border: none;
+  /* Remove border */
+  cursor: pointer;
+  /* Show pointer cursor on hover */
+  outline: none;
+  /* Remove default focus outline */
+  padding: 1rem;
+  margin-left: 40px;
+  font-size: 84pt;
+  transition: transform 0.3s ease;
+}
+
+.create-document-button:hover {
+  transform: scale(1.04) translate(-0%, -0%);
+  /* Change background color on hover */
+}
+
+.grid-container {
+  max-width: fit-content;
+  /* Set max width for the documents container */
+  margin: 0 auto;
+  /* Center the container horizontally */
+  display: flex;
+  /* Use flexbox for layout */
+  flex-wrap: wrap;
+  /* Allow items to wrap to the next line */
+}
+
+.grid-item {
+  height: 275px;
+  width: 212px;
+  /* Set width for each document card with space between */
+  background-color: #0079FF;
+  /* Background color */
+  color: white;
+  /* Text color */
+  padding: 20px;
+  /* Adjust padding as needed */
+  margin-bottom: 40px;
+  /* Adjust margin between rows */
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
+  text-align: left;
+  /* Center text horizontally */
+  padding: 1rem;
+  margin-left: 40px;
+  font-size: 200%;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.grid-item:hover {
+  transform: scale(1.04) translate(-0%, -0%);
+}
+
+.task-container {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.task-card {
+  background-color: #777777;
+  color: white;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.parent-container {
+  margin: 1rem;
+  padding: 2rem 2rem;
+  display: grid;
+  grid-template-columns: 73% 27%;
+  grid-gap: 30px;
+}
