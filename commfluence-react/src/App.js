@@ -5,15 +5,14 @@ import Contact from "./pages/Contact";
 import "./styles/Header.css";
 import Header from "./components/Header";
 import Home from "./components/HomeContent";
-import CreateDocument from './components/CreateDocument'; 
-import DocumentPage from './components/DocumentPage'; 
-import DocumentViewer from './components/DocumentViewer'; 
+import CreateDocument from './components/CreateDocument';
+import DocumentPage from './components/DocumentPage';
+import DocumentViewer from './components/DocumentViewer';
 
 
 const App = () => (
   <div>
     <Router>
-      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

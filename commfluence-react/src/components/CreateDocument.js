@@ -8,16 +8,6 @@ const CreateDocument = () => {
   const navigate = useNavigate(); // For programmatically navigating
 
   useEffect(() => {
-    const createNewDocument = async () => {
-      const defaultName = "New Document"; // Default name, or prompt the user for a name
-      const docRef = await addDocument("documents", { content: "{}", name: defaultName });
-      // ...
-    };
-
-    createNewDocument();
-  }, [navigate]);
-  
-  useEffect(() => {
     // Create a new blank document as soon as the component mounts
     const createNewDocument = async () => {
       const docRef = await addDocument("documents", { content: "{}" }); // Create a blank document
