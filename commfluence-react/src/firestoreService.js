@@ -1,5 +1,5 @@
 import { firestore } from './firebase';
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where } from 'firebase/firestore';
 
 // Add a new document
 export const addDocument = async (collectionName, data) => {
@@ -11,15 +11,16 @@ export const addDocument = async (collectionName, data) => {
   }
 };
 
-export const getDocuments = async (collectionName) => {
-    try {
-      const querySnapshot = await getDocs(collection(firestore, collectionName));
-      return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    } catch (error) {
-      console.error("Error getting documents: ", error);
-    }
-  };
-
+export const getDocuments = async (collectionName, userId) => {
+  try {
+    const q = query(collection(firestore, collectionName), where('userId', '==', userId));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Error getting documents: ", error);
+    return [];
+  }
+};
 
 // Get document from a collection
 export const getDocument = async (collectionName, docId) => {

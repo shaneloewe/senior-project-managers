@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { getDocuments } from '../firestoreService'; // Import the Firestore function
-import { useNavigate } from 'react-router-dom'; // If you are using react-router
-import '../styles/DocumentPage.css'; // Adjust the path if necessary
+import { useNavigate } from 'react-router-dom'; 
+import '../styles/DocumentPage.css'; 
 import '../styles/Header.css';
 import Header from '../components/Header.js';
-
+import { useAuth } from '../AuthContext';
 const DocumentPage = () => {
   const [documents, setDocuments] = useState([]);
   const navigate = useNavigate();
+  const { currentUser } = useAuth(); // Use the useAuth hook to access the current user
 
   useEffect(() => {
     const fetchDocuments = async () => {
-      const docs = await getDocuments('documents'); // Fetch documents from Firestore
+      const docs = await getDocuments('documents', currentUser.uid); // Fetch documents from Firestore
       setDocuments(docs);
     };
 
     fetchDocuments();
-  }, []);
+  }, [currentUser]);
 
   const openDocument = (docId) => {
     // Navigate to the document editor/viewer page with the docId
     navigate(`/document/${docId}`);
   };
   const handleCreateNewDocument = () => {
-    navigate('/create-document'); // Assuming this is the route for CreateDocument
+    navigate('/create-document'); 
   };
 
   return (
