@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './AuthContext'; // Import AuthProvider
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import "./styles/Header.css";
@@ -9,9 +10,8 @@ import CreateDocument from './components/CreateDocument';
 import DocumentPage from './components/DocumentPage';
 import DocumentViewer from './components/DocumentViewer';
 
-
 const App = () => (
-  <div>
+  <AuthProvider> {}
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -22,7 +22,7 @@ const App = () => (
         <Route path="/document/:docId" element={<DocumentViewer />} />
       </Routes>
     </Router>
-  </div>
+  </AuthProvider>
 );
 
 export default App;

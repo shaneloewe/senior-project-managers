@@ -1,7 +1,7 @@
-import React, { useEffect, useState, createContext } from 'react';
-import { auth } from '/firebase'; // Adjust path if needed
-
+import React, { useEffect, useState, createContext, useContext } from 'react';
+import { auth } from './firebase'; 
 export const AuthContext = createContext();
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
