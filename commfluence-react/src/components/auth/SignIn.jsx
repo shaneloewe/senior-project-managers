@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth'; // Assuming you're using Firebase for authentication
 import './SignIn.css'; // Import the CSS file for styling
 
 const SignIn = ({ auth }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory(); // Initialize useHistory hook
 
     const signIn = (e) => {
         e.preventDefault();
@@ -12,6 +14,7 @@ const SignIn = ({ auth }) => {
             .then((userCredential) => {
                 // Handle successful sign-in
                 console.log(userCredential);
+                history.push('/projects'); // sends user to projects page
             })
             .catch((error) => {
                 // Handle sign-in errors

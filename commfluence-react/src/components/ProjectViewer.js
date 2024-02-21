@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { getDocuments } from '../firestoreService'; // Import the Firestore function
-import { useNavigate } from 'react-router-dom'; // If you are using react-router
+import { getDocuments } from '../firestoreService.js'; // Import the Firestore function
+import { useParams, useNavigate } from 'react-router-dom'; // If you are using react-router
 import '../styles/DocumentPage.css'; // Adjust the path if necessary
 import '../styles/Header.css';
-import Header from '../components/Header.js';
+import Header from './Header.js';
 
-const DocumentPage = () => {
+const ProjectViewer = () => {
   const [documents, setDocuments] = useState([]);
+  const { projId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDocuments = async () => {
-      const docs = await getDocuments('documents'); // Fetch documents from Firestore
+      const docs = await getDocuments('documents', projId); // Fetch documents from Firestore
       setDocuments(docs);
     };
 
@@ -20,10 +21,10 @@ const DocumentPage = () => {
 
   const openDocument = (docId) => {
     // Navigate to the document editor/viewer page with the docId
-    navigate(`/document/${docId}`);
+    navigate(`/project/${projId}/${docId}`);
   };
   const handleCreateNewDocument = () => {
-    navigate('/create-document'); // Assuming this is the route for CreateDocument
+    navigate(`/project/${projId}/create-document`); // Assuming this is the route for CreateDocument
   };
 
   return (
@@ -63,4 +64,4 @@ const DocumentPage = () => {
   );
 };
 
-export default DocumentPage;
+export default ProjectViewer;

@@ -1,0 +1,72 @@
+/* DocumentPage.css */
+
+.projects-page-title {
+  margin-left: 84px;
+  width: 64%;
+  font-size: 56px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.create-project-button {
+  width: 212px;
+  /* 8.5 inches */
+  height: 275px;
+  /* 11 inches */
+  background-color: #777777;
+  /* Background color */
+  color: white;
+  /* Text color */
+  padding: 10px;
+  /* Adjust padding as needed */
+  border: none;
+  /* Remove border */
+  cursor: pointer;
+  /* Show pointer cursor on hover */
+  outline: none;
+  /* Remove default focus outline */
+  padding: 1rem;
+  margin-left: 0px;
+  font-size: 84pt;
+  transition: transform 0.3s ease;
+  border-radius: 15px;
+}
+
+.create-project-button:hover {
+  transform: scale(1.04) translate(-0%, -0%);
+  /* Change background color on hover */
+}
+
+.project-grid-container {
+  max-width: fit-content;
+  margin-left: 84px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.project-grid-item {
+  height: 275px;
+  width: 212px;
+  background-color: #0079FF;
+  color: white;
+  padding: 20px;
+  margin-right: 40px;
+  /* Adjust margin-right to create space between cards */
+  margin-bottom: 40px;
+  /* Same for bottom here */
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 200%;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.grid-item:hover {
+  transform: scale(1.04) translate(-0%, -0%);
+}

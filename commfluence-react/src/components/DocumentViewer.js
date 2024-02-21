@@ -5,7 +5,7 @@ import 'quill/dist/quill.snow.css'; // Import Quill styles
 import { getDocument, updateDocument, deleteDocument } from '../firestoreService'; // Import the necessary functions
 
 const DocumentViewer = () => {
-  const { docId } = useParams();
+  const { projId, docId } = useParams();
   const [document, setDocument] = useState(null);
   const [documentName, setDocumentName] = useState(''); // State for document name
   const quillRef = useRef();
@@ -20,9 +20,8 @@ const DocumentViewer = () => {
         setDocumentName(doc.name); // Set the initial document name
       }
     };
-
     fetchDocument();
-  }, [docId]);
+  }, []);
 
   useEffect(() => {
     if (document) {
@@ -41,7 +40,7 @@ const DocumentViewer = () => {
 
   const handleDelete = async () => {
     await deleteDocument('documents', docId);
-    navigate('/documents');
+    navigate(`/project/${projId}`);
   };
 
   const handleSave = async () => {
@@ -51,6 +50,17 @@ const DocumentViewer = () => {
     await updateDocument('documents', docId, { name: documentName, content: contentJSON });
     console.log("Document updated");
     // Additional handling after saving the document
+
+  };
+
+  const saveAndExit = async () => {
+    const content = quillInstance.current.getContents(); // Get updated content
+    const contentJSON = JSON.stringify(content); // Convert to JSON string
+
+    await updateDocument('documents', docId, { name: documentName, content: contentJSON });
+    console.log("Document updated");
+    // Additional handling after saving the document
+    navigate(`/project/${projId}`);
   };
 
   return (
@@ -64,9 +74,10 @@ const DocumentViewer = () => {
         style={{ marginBottom: '10px', width: '100%', padding: '5px' }}
       />
       <div ref={quillRef} />
+      <button onClick={saveAndExit}>Save and Exit</button>
       <button onClick={handleSave}>Save Document</button>
       <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>\
-      Delete Document
+        Delete Document
       </button>
     </div>
   );
