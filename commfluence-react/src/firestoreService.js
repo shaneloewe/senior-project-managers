@@ -15,17 +15,14 @@ export const addDocument = async (collectionName, data) => {
   }
 };
 
-export const getDocuments = async (collectionName, projId) => {
+export const getDocuments = async (collectionName) => {
   try {
-    const querySnapshot = await getDocs(
-      query(collection(firestore, collectionName), where('projId', '==', projId))
-    );
+    const querySnapshot = await getDocs(collection(firestore, collectionName));
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error getting documents: ", error);
   }
 };
-
 
 // Get document from a collection
 export const getDocument = async (collectionName, docId) => {
