@@ -9,7 +9,6 @@ const CreateDocument = () => {
   const [content, setContent] = useState('');
   const navigate = useNavigate(); // For programmatically navigating
   const { currentUser } = useAuth();
-
   useEffect(() => {
     const createNewDocument = async () => {
       if (currentUser) {
@@ -22,10 +21,11 @@ const CreateDocument = () => {
           console.log("New blank document created with ID:", docRef.id);
           navigate(`/project/${projId}/${docRef.id}`); // Redirect to the DocumentViewer for the new document
         }
-      };
-
-      createNewDocument();
-    }, [navigate]);
+      }
+    };
+  
+    createNewDocument(); 
+  }, [navigate]); // Add navigate to the dependency array
 
   const handleSave = async () => {
     const contentJSON = JSON.stringify(content); // Convert Delta object to JSON string

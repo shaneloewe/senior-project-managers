@@ -6,8 +6,7 @@ export const addDocument = async (collectionName, data) => {
   try {
     const docRef = await addDoc(collection(firestore, collectionName), {
       ...data,
-      // Include the projId field in the document data
-      projId: data.projId, // Assuming data.projId contains the projectId
+      projId: data.projId, 
     });
     return docRef;
   } catch (error) {
@@ -15,14 +14,16 @@ export const addDocument = async (collectionName, data) => {
   }
 };
 
-export const getDocuments = async (collectionName) => {
+export const getDocuments = async (collectionName, projId) => {
   try {
-    const querySnapshot = await getDocs(collection(firestore, collectionName));
+    const q = query(collection(firestore, collectionName), where("projId", "==", projId));
+    const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error getting documents: ", error);
   }
 };
+
 
 // Get document from a collection
 export const getDocument = async (collectionName, docId) => {

@@ -12,12 +12,14 @@ const ProjectViewer = () => {
 
   useEffect(() => {
     const fetchDocuments = async () => {
-      const docs = await getDocuments('documents', projId); // Fetch documents from Firestore
-      setDocuments(docs);
+      if (projId) {
+        const docs = await getDocuments('documents', projId);
+        setDocuments(docs);
+      }
     };
 
     fetchDocuments();
-  }, []);
+  }, [projId]);
 
   const openDocument = (docId) => {
     // Navigate to the document editor/viewer page with the docId
