@@ -21,7 +21,8 @@ const Authentication = () => {
         if (isLogin) {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    console.log('Logged in:', userCredential.user);
+                    console.log('Logged in uid:', userCredential.user.uid);
+                    console.log('Email', userCredential.user.email);
                     navigate('/projects');
                 })
                 .catch((error) => {
