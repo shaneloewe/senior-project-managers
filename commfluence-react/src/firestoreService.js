@@ -6,7 +6,7 @@ export const addDocument = async (collectionName, data) => {
   try {
     const docRef = await addDoc(collection(firestore, collectionName), {
       ...data,
-      projId: data.projId, 
+      projId: data.projId,
     });
     return docRef;
   } catch (error) {
@@ -82,6 +82,16 @@ export const getProjects = async (collectionName, projId) => {
   try {
     const querySnapshot = await getDocs(collection(firestore, collectionName));
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Error getting documents: ", error);
+  }
+};
+
+export const getCurrentProject = async (collectionName, projId) => {
+  try {
+    const docRef = doc(firestore, collectionName, projId);
+    const docSnap = await getDoc(docRef);
+    return docSnap;
   } catch (error) {
     console.error("Error getting documents: ", error);
   }

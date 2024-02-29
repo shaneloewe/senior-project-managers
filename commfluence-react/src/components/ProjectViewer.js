@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDocuments } from '../firestoreService.js'; // Import the Firestore function
+import { getDocuments, getCurrentProject } from '../firestoreService.js'; // Import the Firestore function
 import { useParams, useNavigate } from 'react-router-dom'; // If you are using react-router
 import '../styles/DocumentPage.css'; // Adjust the path if necessary
 import '../styles/Header.css';
@@ -7,14 +7,19 @@ import Header from './Header.js';
 
 const ProjectViewer = () => {
   const [documents, setDocuments] = useState([]);
+  const [projectName, setProjectName] = useState('Loading...');
   const { projId } = useParams();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchDocuments = async () => {
       if (projId) {
         const docs = await getDocuments('documents', projId);
         setDocuments(docs);
+        const proj = await getCurrentProject('Projects', projId);
+        const projName = proj.get('name');
+        setProjectName(projName);
       }
     };
 
@@ -33,8 +38,8 @@ const ProjectViewer = () => {
     <div class='logged-in'>
       <Header />
       <div class="banner-container">
-        <a href="/projects" class="back-button"></a>
-        <h1 class='banner'>Project</h1>
+        <a href="/projects" class="back-button">〈</a>
+        <h1 class='banner'>{projectName}</h1>
         <div class="spacer"></div>
         <h1 class='taskboard'>Taskboard</h1>
       </div>

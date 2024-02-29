@@ -1,17 +1,18 @@
 .authentication-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Change justify-content to flex-start */
     align-items: center;
     height: 100vh;
+    margin-left: 50px;
 }
 
 .authentication-box {
     width: 300px;
-    padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f9f9f9;
     text-align: center;
+    margin-left: 20px;
+    /* Add margin-left to push the box to the left */
 }
 
 .form-group {

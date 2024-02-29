@@ -3,15 +3,23 @@ import Authentication from '../components/auth/Authentication';
 import AuthDetails from '../components/auth/AuthDetails';
 import Header from '../components/Header.js';
 import '../styles/Header.css'
+import { useState } from 'react';
 
 const Home = () => {
-    return (
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // Function to handle login
+    const handleLogin = () => {
+        // Perform login logic, then set isLoggedIn to true
+        setIsLoggedIn(true);
+    };
+
+    return (
         <div className="home-page">
             <Header />
-            <h2>Let's get<br></br>started</h2>
-            <Authentication />
-            <AuthDetails />
+            {!isLoggedIn && <Authentication onLogin={handleLogin} />}
+            {isLoggedIn && <AuthDetails />}
         </div>
     );
 }
