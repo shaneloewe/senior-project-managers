@@ -116,3 +116,13 @@ export const deleteProject = async (collectionName, projId) => {
     console.error("Error deleting project: ", error);
   }
 };
+
+export const addUser = async (collectionName, data) => {
+  try {
+    const docRef = await addDoc(collection(firestore, collectionName), data);
+    return docRef;
+  } catch (error) {
+    console.error("Error adding user to Firestore:", error);
+    throw error; // Rethrow the error to be handled by the caller
+  }
+};
