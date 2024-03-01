@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; // If you are using react-router
 import '../styles/ProjectsPage.css'; // Adjust the path if necessary
 import '../styles/Header.css';
 import Header from '../components/Header.js';
+import { useAuth } from '../AuthContext';
 
 const CreateProjectPopup = ({ onSave, onClose }) => {
     const [projectName, setProjectName] = useState('');
@@ -57,12 +58,12 @@ const Projects = () => {
     const handleClosePopup = () => {
         setShowPopup(false);
     };
-
+    const { currentUser } = useAuth();
     const handleSaveProject = async (projectName) => {
         try {
             // Save the project in Firestore
             console.log("Saving project:", projectName);
-            const projId = await addProject('Projects', projectName);
+            const projId = await addProject('Projects', projectName, currentUser.uid);
             // Redirect to the newly created project
             navigate(`/project/${projId}`);
         } catch (error) {

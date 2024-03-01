@@ -1,5 +1,6 @@
-import { firestore } from './firebase';
+import { firestore, arrayUnion } from './firebase';
 import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where } from 'firebase/firestore';
+import firebase from 'firebase/app'; // Import Firebase core
 
 // Add a new document
 export const addDocument = async (collectionName, data) => {
@@ -64,11 +65,11 @@ export const deleteDocument = async (collectionName, docId) => {
 };
 
 // Add a new project
-export const addProject = async (collectionName, projectName) => {
+export const addProject = async (collectionName, projectName, uid) => {
   try {
     const docRef = await addDoc(collection(firestore, collectionName), {
       name: projectName,
-      users: []
+      users: arrayUnion(uid) // Use arrayUnion directly
     });
     return docRef.id; // Return the ID of the newly added project document
   } catch (error) {
