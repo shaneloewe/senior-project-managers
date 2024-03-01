@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDocuments, getCurrentProject } from '../firestoreService.js'; // Import the Firestore function
+import { getDocuments, getCurrentProject, deleteProject } from '../firestoreService.js'; // Import the Firestore function
 import { useParams, useNavigate } from 'react-router-dom'; // If you are using react-router
 import '../styles/DocumentPage.css'; // Adjust the path if necessary
 import '../styles/Header.css';
@@ -30,8 +30,14 @@ const ProjectViewer = () => {
     // Navigate to the document editor/viewer page with the docId
     navigate(`/project/${projId}/${docId}`);
   };
+
   const handleCreateNewDocument = () => {
     navigate(`/project/${projId}/create-document`); // Assuming this is the route for CreateDocument
+  };
+
+  const handleDelete = async () => {
+    await deleteProject('Projects', projId);
+    navigate(`/projects`);
   };
 
   return (
@@ -39,7 +45,10 @@ const ProjectViewer = () => {
       <Header />
       <div class="banner-container">
         <a href="/projects" class="back-button">〈</a>
-        <h1 class='banner'>{projectName}</h1>
+        <h1 class='projects-banner'>{projectName}</h1>
+        <button className="deleteProject" onClick={handleDelete}>
+          Delete
+        </button>
         <div class="spacer"></div>
         <h1 class='taskboard'>Taskboard</h1>
       </div>

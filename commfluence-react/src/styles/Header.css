@@ -27,6 +27,23 @@ ul {
     display: flex;
 }
 
+.logout-navitem a {
+    margin-right: 1rem;
+    text-decoration: none;
+    color: #909090;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.login-navitem:hover {
+    margin-right: 1rem;
+    text-decoration: none;
+    color: #0079FF;
+    transform: scale(1.2) translate(-0%, -0%);
+    font-weight: bold;
+}
+
 .nav-items a {
     margin-right: 1rem;
     text-decoration: none;

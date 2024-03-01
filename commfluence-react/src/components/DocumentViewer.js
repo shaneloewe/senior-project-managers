@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css'; // Import Quill styles
 import { getDocument, updateDocument, deleteDocument } from '../firestoreService'; // Import the necessary functions
+import '../styles/DocumentViewer.css';
+
 
 const DocumentViewer = () => {
   const { projId, docId } = useParams();
@@ -65,7 +67,6 @@ const DocumentViewer = () => {
 
   return (
     <div>
-      <h1>Document Editor</h1>
       <input
         type="text"
         value={documentName}
@@ -73,12 +74,17 @@ const DocumentViewer = () => {
         placeholder="Document Name"
         style={{ marginBottom: '10px', width: '100%', padding: '5px' }}
       />
-      <div ref={quillRef} />
-      <button onClick={saveAndExit}>Save and Exit</button>
-      <button onClick={handleSave}>Save Document</button>
-      <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>\
-        Delete Document
-      </button>
+      <div class="button-container">
+        <button onClick={saveAndExit}>Save and Exit</button>
+        <button onClick={handleSave}>Save Document</button>
+        <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>
+          Delete Document
+        </button>
+      </div>
+      <div class="quill-container">
+        <div ref={quillRef} />
+      </div>
+
     </div>
   );
 };

@@ -67,6 +67,41 @@ body {
   border-radius: 15px;
 }
 
-.grid-item:hover {
+.project-grid-item:hover {
   transform: scale(1.04) translate(-0%, -0%);
+}
+
+.deleteProject {
+  display: flex;
+  /* Use flexbox */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  background-color: #777777;
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+  width: 10%;
+  border-radius: 0px;
+  height: 83px;
+  transition: background-color 0.3s ease;
+}
+
+.deleteProject:hover {
+  background-color: #c14141;
+}
+
+.projects-banner {
+  /* Expand to fill available space */
+  background-color: #0079FF;
+  /* Background color of the banner */
+  color: white;
+  /* Text color */
+  padding: 20px;
+  padding-left: 0px;
+  /* Adjust as needed */
+  margin: 0;
+  /* Remove default margin */
+  width: 54%;
 }

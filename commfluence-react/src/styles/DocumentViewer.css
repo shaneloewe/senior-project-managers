@@ -1,0 +1,98 @@
+/* Container for the document editor */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.docview-title {
+    margin-left: 40px;
+}
+
+/* Document name input */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    margin-left: 50px;
+    color: #0079FF;
+    font-weight: bold;
+
+}
+
+.quill-container {
+    margin: 2vh auto;
+    /* Set top and bottom margins to 20% of viewport height */
+    width: 60%;
+    /* Set the width to 60% of the viewport width */
+    height: 130vh;
+    /* Set the height to 60% of the viewport height */
+    position: relative;
+    /* Set position to relative for height calculation */
+}
+
+/* Quill editor */
+.ql-editor {
+    min-height: 0;
+    /* Reset min-height */
+    width: 100%;
+    /* Set width to 100% to fill the container */
+    height: 100%;
+    /* Set height to 100% to fill the container height */
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    /* Set the desired font family */
+}
+
+.button-container {
+    margin-left: 40px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Save and exit button */
+.save-exit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.save-exit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Save document button */
+.save-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+/* Delete document button */
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
