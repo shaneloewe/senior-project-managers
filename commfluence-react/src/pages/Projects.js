@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { getProjects, addProject } from '../firestoreService'; // Import the Firestore function
 import { useNavigate } from 'react-router-dom'; // If you are using react-router
+import { AuthContext } from '../AuthContext.js';
 import '../styles/ProjectsPage.css'; // Adjust the path if necessary
 import '../styles/Header.css';
 import Header from '../components/Header.js';
@@ -33,6 +34,7 @@ const CreateProjectPopup = ({ onSave, onClose }) => {
 const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -62,7 +64,8 @@ const Projects = () => {
         try {
             // Save the project in Firestore
             console.log("Saving project:", projectName);
-            const projId = await addProject('Projects', projectName);
+            console.log("Current User: ", currentUser);
+            const projId = await addProject('Projects', projectName, currentUser);
             // Redirect to the newly created project
             navigate(`/project/${projId}`);
         } catch (error) {

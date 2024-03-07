@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import CreateProjectPopup from '../pages/Projects';
-
 
 const CreateProject = () => {
     const [showPopup, setShowPopup] = useState(false);

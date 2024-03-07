@@ -64,11 +64,12 @@ export const deleteDocument = async (collectionName, docId) => {
 };
 
 // Add a new project
-export const addProject = async (collectionName, projectName) => {
+export const addProject = async (collectionName, projectName, currentUser) => {
+  console.log(currentUser);
   try {
     const docRef = await addDoc(collection(firestore, collectionName), {
       name: projectName,
-      users: []
+      users: [currentUser.uid]
     });
     return docRef.id; // Return the ID of the newly added project document
   } catch (error) {
@@ -119,7 +120,11 @@ export const deleteProject = async (collectionName, projId) => {
 
 export const addUser = async (collectionName, data) => {
   try {
-    const docRef = await addDoc(collection(firestore, collectionName), data);
+    const docRef = await addDoc(collection(firestore, collectionName), {
+      ...data,
+      email: data.email,
+      uid: data.uid
+    });
     return docRef;
   } catch (error) {
     console.error("Error adding user to Firestore:", error);

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 import { getDocuments, getCurrentProject, deleteProject } from '../firestoreService.js'; // Import the Firestore function
 import { useParams, useNavigate } from 'react-router-dom'; // If you are using react-router
 import '../styles/DocumentPage.css'; // Adjust the path if necessary
@@ -9,6 +10,7 @@ const ProjectViewer = () => {
   const [documents, setDocuments] = useState([]);
   const [projectName, setProjectName] = useState('Loading...');
   const { projId } = useParams();
+
   const navigate = useNavigate();
 
 

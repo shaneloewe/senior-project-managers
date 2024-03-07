@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 import './Authentication.css'; // Import the CSS file for styling
 import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
-import { addUser } from '../../firestoreService';
+import { addUser } from '../../firestoreService.js';
 
 
 
@@ -38,19 +38,19 @@ const Authentication = () => {
                         email: userCredential.user.email,
                     }
                     addUser('users', userData)
-                    .then(docRef => {
-                        console.log('User added to Firestore with ID:', docRef.id);
-                        navigate('/projects');
-                    })
-                    .catch(error => {
-                        console.error('Error adding user to Firestore:', error);
-                    });
+                        .then(docRef => {
+                            console.log('User added to Firestore with ID:', docRef.id);
+                            navigate('/projects');
+                        })
+                        .catch(error => {
+                            console.error('Error adding user to Firestore:', error);
+                        });
 
-                console.log('Account Created:', userCredential.user);
-            })
-            .catch((error) => {
-                console.log('Account Creation Error:', error);
-            });
+                    console.log('Account Created:', userCredential.user);
+                })
+                .catch((error) => {
+                    console.log('Account Creation Error:', error);
+                });
         }
     };
 
