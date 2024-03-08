@@ -1,5 +1,5 @@
 import { firestore } from './firebase';
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where } from 'firebase/firestore';
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where, setDoc, arrayUnion } from 'firebase/firestore';
 
 // Add a new document
 export const addDocument = async (collectionName, data) => {
@@ -120,14 +120,48 @@ export const deleteProject = async (collectionName, projId) => {
 
 export const addUser = async (collectionName, data) => {
   try {
-    const docRef = await addDoc(collection(firestore, collectionName), {
+    // Create a reference to the document with the specified UID
+    const userRef = doc(firestore, collectionName, data.uid);
+
+    // Set the document with the provided data
+    await setDoc(userRef, {
       ...data,
-      email: data.email,
-      uid: data.uid
+      email: data.email // Since the UID is the document ID, no need to store it separately
     });
-    return docRef;
+
+    return userRef; // Return the document reference
   } catch (error) {
     console.error("Error adding user to Firestore:", error);
     throw error; // Rethrow the error to be handled by the caller
   }
 };
+
+const addUserToProject = async (email, projectId) => {
+  try {
+    // Step 1: Find user by email
+    const usersRef = collection(firestore, 'users');
+    const q = query(usersRef, where('email', '==', email));
+    const querySnapshot = await getDocs(q);
+
+    let userId;
+    querySnapshot.forEach((doc) => {
+      userId = doc.id; // The user's UID is the document ID
+    });
+
+    if (!userId) {
+      throw new Error('User not found');
+    }
+
+    // Step 2: Add the user's UID to the project's users array
+    const projectRef = doc(firestore, 'Projects', projectId);
+    await updateDoc(projectRef, {
+      users: arrayUnion(userId)
+    });
+
+  } catch (error) {
+    console.error('Error adding user to project:', error);
+    throw error;
+  }
+};
+
+export { addUserToProject };
