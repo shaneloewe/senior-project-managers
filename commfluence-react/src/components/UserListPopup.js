@@ -15,7 +15,10 @@ const UserListPopup = ({ users, onAddUser, onClose }) => {
         <div className="popup-title">Collaborators</div>
         <ul className="user-list">
           {users.map((user, index) => (
-            <li key={index} className="user-circle">{user.charAt(0).toUpperCase()}</li>
+            <li key={index} className="user-circle">
+              {user.charAt(0).toUpperCase()}
+              <span className="tooltip">{user}</span> {/* Tooltip */}
+            </li>
           ))}
         </ul>
 
