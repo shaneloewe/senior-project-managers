@@ -15,7 +15,8 @@ const UserListPopup = ({ users, onAddUser, onClose }) => {
         <div className="popup-title">Collaborators</div>
         <ul className="user-list">
           {users.map((user, index) => (
-            <li key={index} className="user-circle">
+            <li key={index} className="user-circle"
+              style={{ backgroundColor: user.color || '#0079FF' }}>
               {user.charAt(0).toUpperCase()}
               <span className="tooltip">{user}</span> {/* Tooltip */}
             </li>

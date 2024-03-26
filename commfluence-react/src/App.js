@@ -10,6 +10,7 @@ import DocumentViewer from './components/DocumentViewer';
 import Projects from "./pages/Projects";
 import CreateProject from "./components/CreateProject";
 import ProjectViewer from "./components/ProjectViewer";
+import UserPage from './pages/UserPage';
 
 const App = () => (
   <AuthProvider> { }
@@ -23,6 +24,7 @@ const App = () => (
         <Route path="/projects" element={<Projects />} />
         <Route path="/create-project" element={<CreateProject />} />
         <Route path="/project/:projId" element={<ProjectViewer />} />
+        <Route path="/account" element={<UserPage />} />
       </Routes>
     </Router>
   </AuthProvider>

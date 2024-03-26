@@ -1,13 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 import { AuthContext } from '../AuthContext';
 import { signOut } from "firebase/auth";
 import { auth } from '../firebase';
+import collabIcon from '../styles/collabIcon.jpg';
+import { getDocument, updateDocument } from '../firestoreService'; // Assuming updateDocument is available
+
 
 const Header = () => {
     const navigate = useNavigate();
+    const [userData, setUserData] = useState(null);
     const { currentUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (auth.currentUser) {
+                const data = await getDocument('users', auth.currentUser.uid);
+                setUserData(data);
+            }
+        };
+        fetchUserData();
+    }, []);
 
     const handleNavigate = (path) => {
         navigate(path);
@@ -60,6 +74,12 @@ const Header = () => {
                     )}
                 </ul>
             </nav>
+            {userData && (
+                <div className="profile-icon" onClick={() => handleNavigate('/account')} 
+                     style={{ backgroundColor: userData.color || '#0079FF' }}>
+                    {userData.email.charAt(0).toUpperCase()}
+                </div>
+            )}
         </div>
     );
 };
