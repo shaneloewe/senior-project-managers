@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext';
 import { auth } from '../firebase';
 import { getDocument, updateDocument } from '../firestoreService'; // Assuming updateDocument is available
-
+import '../styles/UserListPopup.css'; // Import the CSS file for styling
 const UserListPopup = ({ users, onAddUser, onClose }) => {
   const [email, setEmail] = useState('');
 
