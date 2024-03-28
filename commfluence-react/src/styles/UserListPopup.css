@@ -22,14 +22,18 @@
   
   
   .popup-content ul {
-    list-style-type: none; /* Removes the default bullet points */
-    padding: 0; /* Resets default padding */
+    list-style-type: none;
+    padding: 0;
+    display: flex; /* Make it a flex container */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: flex-start; /* Align items to the start */
   }
   
   .popup-content li {
-    padding: 8px; /* Adds some padding around each list item */
-    border-bottom: 1px solid #ccc; /* Adds a light border to each item */
-    margin-bottom: 5px; /* Adds some space between items */
+    padding: 8px;
+    margin-bottom: 5px;
+    flex: 0 0 calc(25% - 10px); /* Adjust width to fit 4 items per row */
+    box-sizing: border-box;
   }
   
   .popup-content li:last-child {
@@ -60,12 +64,13 @@
   }
   
   .user-circle {
-    display: inline-block;
-    width: 100px;  /* Diameter of the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;  /* Diameter of the circle */
     height: 100px; /* Diameter of the circle */
     line-height: 100px; /* Center the text vertically */
     border-radius: 50%; /* Makes the div circular */
-    background-color: #0079FF; /* Background color */
     color: white; /* Text color */
     text-align: center; /* Center the text horizontally */
     margin: 5px; /* Space between circles */
@@ -74,6 +79,8 @@
     font-weight: bold; /* Make the font bold */
     position: relative; /* Required for tooltip positioning */
     cursor: pointer; /* Change cursor to indicate hover state */
+    box-sizing: border-box; /* Include padding and borders in width and height */
+
   }
   
   .tooltip {

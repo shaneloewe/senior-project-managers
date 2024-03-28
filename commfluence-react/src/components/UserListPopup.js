@@ -6,7 +6,8 @@ import '../styles/UserListPopup.css'; // Import the CSS file for styling
 const UserListPopup = ({ users, onAddUser, onClose }) => {
   const [email, setEmail] = useState('');
 
-  const handleAddUser = () => {
+  const handleAddUser = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
     onAddUser(email);
     setEmail('');
   };
@@ -38,17 +39,19 @@ const UserListPopup = ({ users, onAddUser, onClose }) => {
         </ul>
 
 
-        <div className="email-input-container">
-          <input
-            className="email-input" // Added class for styling
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter user email"
-          />
-        </div>
+        <form onSubmit={handleAddUser}> {/* Form wrapping the input and button */}
+          <div className="email-input-container">
+            <input
+              className="email-input"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter user email"
+            />
+          </div>
 
-        <button onClick={handleAddUser}>Add User</button>
+          <button type="submit">Add User</button>
+        </form>
       </div>
     </div>
   );

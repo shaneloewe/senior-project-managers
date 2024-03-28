@@ -46,7 +46,7 @@ const ProjectViewer = () => {
           // Fetch users associated with the project
           const userIds = proj.get('users');
           if (userIds && userIds.length > 0) {
-            fetchUserEmails(userIds);
+            fetchUserDetails(userIds);
           }
         } catch (error) {
           console.error('Error fetching documents:', error);
