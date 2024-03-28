@@ -1,4 +1,4 @@
-import { firestore } from './firebase';
+import { firestore, auth } from './firebase';
 import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where, setDoc, arrayUnion } from 'firebase/firestore';
 
 // Add a new document
@@ -79,12 +79,23 @@ export const addProject = async (collectionName, projectName, currentUser) => {
 };
 
 // Get project from collection
-export const getProjects = async (collectionName, projId) => {
+export const getProjects = async (collectionName, projectName, currentUser) => {
   try {
+    const currentUser = auth.currentUser; // Get current logged-in user
+    if (!currentUser) {
+      throw new Error("No user logged in");
+    }
+
     const querySnapshot = await getDocs(collection(firestore, collectionName));
-    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const projects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Filter projects to only include those created by the current user
+    const userProjects = projects.filter(project => project.createdBy === currentUser.uid);
+
+    return userProjects;
   } catch (error) {
-    console.error("Error getting documents: ", error);
+    console.error("Error getting projects: ", error);
+    throw error;
   }
 };
 
