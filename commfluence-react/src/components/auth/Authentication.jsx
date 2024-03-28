@@ -5,6 +5,15 @@ import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../firestoreService.js';
 
+const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 
 
 const Authentication = () => {
@@ -36,6 +45,7 @@ const Authentication = () => {
                     const userData = {
                         uid: userCredential.user.uid,
                         email: userCredential.user.email,
+                        color: getRandomColor(),
                     }
                     addUser('users', userData)
                         .then(docRef => {

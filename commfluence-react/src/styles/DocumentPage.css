@@ -176,36 +176,6 @@ body {
   align-items: center;
 }
 
-.popup {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.popup-overlay {
-  position: fixed; /* Overlay takes the whole screen */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Center the popup content */
-}
-
-.popup-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
-}
-
-.close-popup {
-}
-
-
 .open-popup-button {
   height: 100%; /* Make the button's height equal to the banner container */
   padding: 0; /* Remove any padding that might increase the size */
@@ -220,17 +190,3 @@ body {
   object-fit: contain;
 }
 
-.popup-content ul {
-  list-style-type: none; /* Removes the default bullet points */
-  padding: 0; /* Resets default padding */
-}
-
-.popup-content li {
-  padding: 8px; /* Adds some padding around each list item */
-  border-bottom: 1px solid #ccc; /* Adds a light border to each item */
-  margin-bottom: 5px; /* Adds some space between items */
-}
-
-.popup-content li:last-child {
-  border-bottom: none; /* Removes the border from the last item */
-}
