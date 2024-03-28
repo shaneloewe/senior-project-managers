@@ -33,17 +33,30 @@ const ProjectViewer = () => {
   useEffect(() => {
     const fetchDocuments = async () => {
       if (projId) {
-        const docs = await getDocuments('documents', projId);
-        setDocuments(docs);
-        const proj = await getCurrentProject('Projects', projId);
-        const projName = proj.get('name');
-        setProjectName(projName);
-        fetchProjectUsers(); // Fetch users when component mounts or projId changes
+        try {
+          // Fetch documents associated with the project
+          const docs = await getDocuments('documents', projId);
+          setDocuments(docs);
+  
+          // Fetch project details
+          const proj = await getCurrentProject('Projects', projId);
+          const projName = proj.get('name');
+          setProjectName(projName);
+  
+          // Fetch users associated with the project
+          const userIds = proj.get('users');
+          if (userIds && userIds.length > 0) {
+            fetchUserEmails(userIds);
+          }
+        } catch (error) {
+          console.error('Error fetching documents:', error);
+        }
       }
     };
-
+  
     fetchDocuments();
   }, [projId]);
+  
 
   const fetchProjectUsers = async () => {
     try {

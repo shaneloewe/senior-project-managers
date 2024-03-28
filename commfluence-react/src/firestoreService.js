@@ -79,25 +79,25 @@ export const addProject = async (collectionName, projectName, currentUser) => {
 };
 
 // Get project from collection
-export const getProjects = async (collectionName, projectName, currentUser) => {
+export const getProjects = async (collectionName) => {
   try {
     const currentUser = auth.currentUser; // Get current logged-in user
     if (!currentUser) {
       throw new Error("No user logged in");
     }
 
-    const querySnapshot = await getDocs(collection(firestore, collectionName));
+    // Query projects where the current user's UID exists in the 'users' array
+    const q = query(collection(firestore, collectionName), where("users", "array-contains", currentUser.uid));
+    const querySnapshot = await getDocs(q);
+
     const projects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-    // Filter projects to only include those created by the current user
-    const userProjects = projects.filter(project => project.createdBy === currentUser.uid);
-
-    return userProjects;
+    return projects;
   } catch (error) {
     console.error("Error getting projects: ", error);
     throw error;
   }
 };
+
 
 export const getCurrentProject = async (collectionName, projId) => {
   try {
