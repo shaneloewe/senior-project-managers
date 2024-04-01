@@ -57,15 +57,15 @@ const ProjectViewer = () => {
       const userIds = project.get('users');
 
       if (userIds && userIds.length > 0) {
-        fetchUserEmails(userIds);
+        fetchUserDetails(userIds);
       }
     } catch (error) {
       console.error("Error fetching project data:", error);
     }
   };
 
-  const fetchUserEmails = async (userIds) => {
-    const userEmails = [];
+  const fetchUserDetails = async (userIds) => {
+    const userDetails = [];
 
     for (const userId of userIds) {
       try {
@@ -73,15 +73,20 @@ const ProjectViewer = () => {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          userEmails.push(userSnap.data().email);
+          const userData = userSnap.data();
+          userDetails.push({
+            email: userData.email,
+            color: userData.color // Assuming color is stored in the userData
+          });
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     }
-    console.log("Retrieved users:", userEmails); // Log the emails
-    setProjectUsers(userEmails);
+    console.log("Retrieved users:", userDetails); // Log the user details
+    setProjectUsers(userDetails);
   };
+
 
   const openDocument = (docId) => {
     navigate(`/project/${projId}/${docId}`);
