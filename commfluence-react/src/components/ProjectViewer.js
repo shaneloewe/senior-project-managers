@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
-import { getDocuments, getCurrentProject, deleteProject, addUserToProject } from '../firestoreService.js';
+import { getDocuments, getCurrentProject, deleteProject, addUserToProject, deleteTask } from '../firestoreService.js';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/DocumentPage.css';
 import '../styles/Header.css';
 import Header from './Header.js';
 import UserListPopup from './UserListPopup';
+import NewTaskPopup from './NewTaskPopup.js';
 import { doc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebase';
 import collabIcon from '../styles/collabIcon.jpg';
@@ -14,8 +15,10 @@ const ProjectViewer = () => {
   const [documents, setDocuments] = useState([]);
   const [projectName, setProjectName] = useState('Loading...');
   const { projId } = useParams();
-  const [showPopup, setShowPopup] = useState(false);
+  const [showUsersPopup, setShowUsersPopup] = useState(false);
+  const [showTasksPopup, setShowTasksPopup] = useState(false);
   const [projectUsers, setProjectUsers] = useState([]);
+  const [tasks, setTasks] = useState({});
 
   const navigate = useNavigate();
 
@@ -36,14 +39,17 @@ const ProjectViewer = () => {
         const docs = await getDocuments('documents', projId);
         setDocuments(docs);
         const proj = await getCurrentProject('Projects', projId);
+        const projTasks = proj.get('tasks') || {};
         const projName = proj.get('name');
         setProjectName(projName);
+        setTasks(projTasks);
         fetchProjectUsers(); // Fetch users when component mounts or projId changes
       }
     };
 
     fetchDocuments();
   }, [projId]);
+
 
   const fetchProjectUsers = async () => {
     try {
@@ -57,7 +63,7 @@ const ProjectViewer = () => {
       console.error("Error fetching project data:", error);
     }
   };
-  
+
   const fetchUserEmails = async (userIds) => {
     const userEmails = [];
 
@@ -90,8 +96,27 @@ const ProjectViewer = () => {
     navigate(`/projects`);
   };
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
+  const toggleUsersPopup = () => {
+    setShowUsersPopup(!showUsersPopup);
+  };
+
+  const toggleTasksPopup = () => {
+    setShowTasksPopup(!showTasksPopup);
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    // Call the deleteTask function from firestoreService
+    try {
+      await deleteTask(projId, taskId);
+      // Remove the task from local state to update the UI
+      const updatedTasks = { ...tasks };
+      delete updatedTasks[taskId];
+      setTasks(updatedTasks);
+      // Optionally, add an alert or notification to indicate success
+    } catch (error) {
+      console.error('Error deleting task:', error);
+      // Optionally, handle the error in the UI
+    }
   };
 
   return (
@@ -103,14 +128,14 @@ const ProjectViewer = () => {
         <button className="deleteProject" onClick={handleDelete}>
           Delete
         </button>
-        <button onClick={togglePopup} className="open-popup-button">
+        <button onClick={toggleUsersPopup} className="open-popup-button">
           <img src={collabIcon} alt="User List" />
         </button>
-        {showPopup && (
-          <UserListPopup 
+        {showUsersPopup && (
+          <UserListPopup
             users={projectUsers}
             onAddUser={handleAddUserByEmail}
-            onClose={togglePopup}
+            onClose={toggleUsersPopup}
           />
         )}
         <div className="spacer"></div>
@@ -136,8 +161,34 @@ const ProjectViewer = () => {
           </button>
         </div>
         <div className="task-container">
-          <div className="task-card">Hi</div>
-          <div className="task-card">Hoy</div>
+          {Object.entries(tasks).map(([taskId, taskDetails]) => (
+            <div key={taskId} className="task-card">
+              <h3>{taskDetails.name}</h3>
+              <p>Due: {taskDetails.due_date}</p>
+              <p>Status: {taskDetails.status}</p>
+              <p>Assigned To: {taskDetails.assignedTo}</p>
+              {/* Add a delete button to each task card */}
+              <button onClick={() => handleDeleteTask(taskId)} className="delete-task-button">
+                Delete Task
+              </button>
+            </div>
+          ))}
+          {/* Preserve the existing Add task button */}
+          <button
+            onClick={toggleTasksPopup}
+            className="create-task-card"
+          >
+            Add task
+          </button>
+          {/* Preserve the NewTaskPopup modal */}
+          {console.log(`projectUsers: ${projectUsers}`)}
+          {showTasksPopup && (
+            <NewTaskPopup
+              project={projId}
+              onClose={toggleTasksPopup}
+              users={projectUsers}
+            />
+          )}
         </div>
       </div>
     </div>

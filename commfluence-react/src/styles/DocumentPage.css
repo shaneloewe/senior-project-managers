@@ -3,8 +3,10 @@
 .banner-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Adjust this as needed */
-  height: 90px; /* Example height, adjust as needed */
+  justify-content: space-between;
+  /* Adjust this as needed */
+  height: 90px;
+  /* Example height, adjust as needed */
 
   /* Center items vertically */
 }
@@ -146,6 +148,19 @@ body {
 }
 
 .task-card {
+  background-color: #ffffff;
+  color: #0079FF;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  border-color: #777777;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.create-task-card {
   background-color: #777777;
   color: white;
   padding: 20px;
@@ -170,7 +185,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent black background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,53 +200,69 @@ body {
 }
 
 .popup-overlay {
-  position: fixed; /* Overlay takes the whole screen */
+  position: fixed;
+  /* Overlay takes the whole screen */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
   display: flex;
   justify-content: center;
-  align-items: center; /* Center the popup content */
+  align-items: center;
+  /* Center the popup content */
 }
 
 .popup-content {
   background-color: white;
   padding: 20px;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Optional: Adds a shadow */
 }
 
-.close-popup {
-}
+.close-popup {}
 
 
 .open-popup-button {
-  height: 100%; /* Make the button's height equal to the banner container */
-  padding: 0; /* Remove any padding that might increase the size */
-  display: flex; /* To center the image inside the button */
-  align-items: center; /* Vertical alignment */
-  border: none; /* Optional: Removes the border */
-  background: none; /* Optional: Removes the background */
+  height: 100%;
+  /* Make the button's height equal to the banner container */
+  padding: 0;
+  /* Remove any padding that might increase the size */
+  display: flex;
+  /* To center the image inside the button */
+  align-items: center;
+  /* Vertical alignment */
+  border: none;
+  /* Optional: Removes the border */
+  background: none;
+  /* Optional: Removes the background */
 }
 
 .open-popup-button img {
-  height: 90%; 
+  height: 90%;
   object-fit: contain;
 }
 
 .popup-content ul {
-  list-style-type: none; /* Removes the default bullet points */
-  padding: 0; /* Resets default padding */
+  list-style-type: none;
+  /* Removes the default bullet points */
+  padding: 0;
+  /* Resets default padding */
 }
 
 .popup-content li {
-  padding: 8px; /* Adds some padding around each list item */
-  border-bottom: 1px solid #ccc; /* Adds a light border to each item */
-  margin-bottom: 5px; /* Adds some space between items */
+  padding: 8px;
+  /* Adds some padding around each list item */
+  border-bottom: 1px solid #ccc;
+  /* Adds a light border to each item */
+  margin-bottom: 5px;
+  /* Adds some space between items */
 }
 
 .popup-content li:last-child {
-  border-bottom: none; /* Removes the border from the last item */
+  border-bottom: none;
+  /* Removes the border from the last item */
 }
