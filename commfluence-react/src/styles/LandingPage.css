@@ -37,6 +37,20 @@ h2 {
     animation-fill-mode: forwards;
     animation-delay: 0.3s;
 }
+.Help-text { 
+    color: #777777;
+    text-align: center;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 1rem;
+    font-size: 20px;
+    opacity: 0;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
+
+}
 
 @keyframes fadeInAnimation {
     0% {

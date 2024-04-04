@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth'; // Assuming you're using Firebase for authentication
 import './SignIn.css'; // Import the CSS file for styling
 
+
 const SignIn = ({ auth }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(''); //new 
     const history = useHistory(); // Initialize useHistory hook
 
     const signIn = (e) => {
@@ -19,6 +21,7 @@ const SignIn = ({ auth }) => {
             .catch((error) => {
                 // Handle sign-in errors
                 console.log(error);
+                setError('Invalid email or password. Please try again.'); //new 
             });
     };
 
@@ -46,7 +49,9 @@ const SignIn = ({ auth }) => {
                 </div>
                 <button type='submit'>Sign In</button>
             </form>
+            {error && <div className='auth-error-message'>{error}</div> } {''}
         </div>
+        
     );
 };
 

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './AuthContext'; // Import AuthProvider
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Help from "./pages/Help";
 import "./styles/Header.css";
 import Home from "./components/HomeContent";
 import CreateDocument from './components/CreateDocument';
@@ -19,6 +20,7 @@ const App = () => (
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/help" element={<Help />}/> 
         <Route path="/project/:projId/create-document" element={<CreateDocument />} />
         <Route path="/project/:projId/:docId" element={<DocumentViewer />} />
         <Route path="/projects" element={<Projects />} />

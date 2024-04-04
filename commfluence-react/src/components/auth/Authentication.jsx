@@ -5,6 +5,7 @@ import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../firestoreService.js';
 
+
 const getRandomColor = () => {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -19,11 +20,13 @@ const getRandomColor = () => {
 const Authentication = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(''); //new 
     const [isLogin, setIsLogin] = useState(true);
     const navigate = useNavigate();
 
     const handleToggle = () => {
         setIsLogin(!isLogin);
+        setError(''); //New 
     };
 
     const handleAuthAction = (e) => {
@@ -37,6 +40,7 @@ const Authentication = () => {
                 })
                 .catch((error) => {
                     console.log('Login Error:', error);
+                    setError('Incorrect email or password. Please try again.'); //New
                 });
         } else {
             createUserWithEmailAndPassword(auth, email, password)
@@ -60,6 +64,7 @@ const Authentication = () => {
                 })
                 .catch((error) => {
                     console.log('Account Creation Error:', error);
+                    setError('Error Creating Account. Please try again.'); //New
                 });
         }
     };
@@ -89,8 +94,9 @@ const Authentication = () => {
                     </div>
                     <button type='submit'>{isLogin ? 'Sign In' : 'Create Account'}</button>
                 </form>
+                {error && <div className='auth-error-message'>{error}</div>} {''}  
                 <div className='toggle-link' onClick={handleToggle}>
-                    {isLogin ? 'Create an account' : 'Back to login'}
+                    {isLogin ? 'Create an account' : 'Back to login'} 
                 </div>
             </div>
         </div>

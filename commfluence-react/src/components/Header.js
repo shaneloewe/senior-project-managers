@@ -62,6 +62,11 @@ const Header = () => {
                             Contact
                         </Link>
                     </li>
+                    <li className='nav-items'>
+                        <Link to="/help" onClick={() => handleNavigate('/help')}>
+                            Help
+                        </Link>
+                    </li>
                     {currentUser ? (
                         <li className='logout-navitem'>
                             <Link to="/" onClick={userSignOut}>
