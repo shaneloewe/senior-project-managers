@@ -5,7 +5,7 @@ import '../styles/Header.css';
 import Header from '../components/Header.js';
 
 
-function Contact() {
+function Help() {
     return (
         <div className="home-page">
             <Header />
@@ -16,4 +16,4 @@ function Contact() {
     );
 }
 
-export default Contact;
+export default Help;

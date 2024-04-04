@@ -94,7 +94,7 @@ const Authentication = () => {
                     </div>
                     <button type='submit'>{isLogin ? 'Sign In' : 'Create Account'}</button>
                 </form>
-                {error && <div className='auth-error-message'>{error}</div>} {"Incorrect email or password. "}  
+                {error && <div className='auth-error-message'>{error}</div>} {''}  
                 <div className='toggle-link' onClick={handleToggle}>
                     {isLogin ? 'Create an account' : 'Back to login'} 
                 </div>
