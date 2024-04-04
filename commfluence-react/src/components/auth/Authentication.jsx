@@ -20,6 +20,7 @@ const getRandomColor = () => {
 const Authentication = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(''); //new 
     const [isLogin, setIsLogin] = useState(true);
     const navigate = useNavigate();
 
