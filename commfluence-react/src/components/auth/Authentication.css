@@ -56,3 +56,8 @@ button[type='submit']:hover {
 .toggle-link:hover {
     text-decoration: underline;
 }
+/*new*/
+.auth-error-message{ 
+    color: red;
+    margin-top: 5px;
+}

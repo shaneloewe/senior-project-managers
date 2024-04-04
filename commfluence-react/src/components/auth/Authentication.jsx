@@ -5,6 +5,7 @@ import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../firestoreService.js';
 
+
 const getRandomColor = () => {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -24,6 +25,7 @@ const Authentication = () => {
 
     const handleToggle = () => {
         setIsLogin(!isLogin);
+        setError(''); //New 
     };
 
     const handleAuthAction = (e) => {
@@ -37,6 +39,7 @@ const Authentication = () => {
                 })
                 .catch((error) => {
                     console.log('Login Error:', error);
+                    setError('Incorrect email or password. Please try again.'); //New
                 });
         } else {
             createUserWithEmailAndPassword(auth, email, password)
@@ -60,6 +63,7 @@ const Authentication = () => {
                 })
                 .catch((error) => {
                     console.log('Account Creation Error:', error);
+                    setError('Error Creating Account. Please try again.'); //New
                 });
         }
     };
