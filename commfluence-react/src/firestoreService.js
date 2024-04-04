@@ -148,6 +148,18 @@ export const addUser = async (collectionName, data) => {
   }
 };
 
+export const getUsers = async (collectionName, projId) => {
+  try {
+    const docRef = doc(firestore, collectionName, projId);
+    const docSnap = await getDoc(docRef);
+    const users = docSnap.data().users; // Access the users field
+    console.log("Users baby: " + users)
+    return users; // Return the users array
+  } catch (error) {
+    console.error("Error getting documents: ", error);
+  }
+};
+
 const addUserToProject = async (email, projectId) => {
   try {
     // Step 1: Find user by email
@@ -230,5 +242,23 @@ export const deleteTask = async (projId, taskId) => {
     await updateDoc(projRef, { tasks });
   } else {
     console.error('Project document does not exist.');
+  }
+};
+
+export const updateTaskStatus = async (projId, taskId, newStatus) => {
+  // Reference the specific project document in Firestore
+  const projectRef = doc(firestore, 'Projects', projId);
+
+  // Prepare the update object to set the new status for the specific task
+  const statusUpdate = {
+    [`tasks.${taskId}.status`]: newStatus // This uses JavaScript computed property names
+  };
+
+  // Update the 'tasks' field within the project document
+  try {
+    await updateDoc(projectRef, statusUpdate);
+    console.log(`Task ${taskId} in project ${projId} updated to status: ${newStatus}`);
+  } catch (error) {
+    console.error("Error updating task status: ", error);
   }
 };

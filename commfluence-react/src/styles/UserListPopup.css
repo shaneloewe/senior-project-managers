@@ -1,134 +1,239 @@
 .popup-overlay {
-    position: fixed; /* Overlay takes the whole screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center the popup content */
-  }
-  
-  .popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
-  }
-  
-  .close-popup {
-  }
-  
-  
-  .popup-content ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex; /* Make it a flex container */
-    flex-wrap: wrap; /* Allow items to wrap */
-    justify-content: flex-start; /* Align items to the start */
-  }
-  
-  .popup-content li {
-    padding: 8px;
-    margin-bottom: 5px;
-    flex: 0 0 calc(25% - 10px); /* Adjust width to fit 4 items per row */
-    box-sizing: border-box;
-  }
-  
-  .popup-content li:last-child {
-    border-bottom: none; /* Removes the border from the last item */
-  }
-  
-  
-  /* Replace the close button with a back arrow */
-  .close-popup {
-    background-color: #0079FF; /* Blue background */
-    color: white; /* White arrow color */
-    font-size: 16px; /* Adjust size as needed */
-    border: none;
-    cursor: pointer;
-    margin-right: 350px;
-  }
-  
-  /* Style for the popup title */
-  .popup-title {
-    text-align: center; /* Center the title */
-    color: #0079FF; /* White text color */
-    background-color: white; /* Blue background */
-    padding: 5px; /* Adjust padding as needed */
-    font-size: 40px; /* Adjust font size as needed */
-    margin-top: -50px; /* Adjust according to your layout */
-    font-family: 'Segoe UI', sans-serif; /* Specify Segoe UI as the font family */
-    font-weight: bold; /* Make the font bold */
-  }
-  
-  .user-circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 55px;  /* Diameter of the circle */
-    height: 100px; /* Diameter of the circle */
-    line-height: 100px; /* Center the text vertically */
-    border-radius: 50%; /* Makes the div circular */
-    color: white; /* Text color */
-    text-align: center; /* Center the text horizontally */
-    margin: 5px; /* Space between circles */
-    font-size: 40px; /* Adjust font size as needed */
-    font-family: 'Segoe UI', sans-serif; /* Specify Segoe UI as the font family */
-    font-weight: bold; /* Make the font bold */
-    position: relative; /* Required for tooltip positioning */
-    cursor: pointer; /* Change cursor to indicate hover state */
-    box-sizing: border-box; /* Include padding and borders in width and height */
+  position: fixed;
+  /* Overlay takes the whole screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Center the popup content */
+}
 
-  }
-  
-  .tooltip {
-    visibility: hidden;
-    width: 200px; /* Adjust as needed */
-    background-color: white;
-    color: #0079FF;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position the tooltip above the circle */
-    left: -40%;
-    font-size: 14px; /* Adjust font size as needed */
-    /* Fade in tooltip */
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  
-  .user-circle:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .email-input-container {
-    margin-top: 20px; /* Add more space above the input */
-    padding-right: 40px;
-    margin-bottom: 1cqmax;
-  }
-  
-  .email-input {
-    margin-top: 20px; /* Increase gap */
-    border-radius: 10px; /* Rounded corners */
-    padding-left: 35px !important; /* Make space for icon, ensure it's applied */
-    background-image: url('./search.png'); /* Path to your search icon */
-    background-position: 10px center; /* Position the icon */
-    background-repeat: no-repeat;
-    background-size: 20px 20px; /* Adjust icon size */
-    /* Rest of your input styling */
-  }
-  
-  
-  .email-icon {
-    position: absolute;
-    left: 10px; /* Adjust as needed */
-    top: 50%;
-    transform: translateY(-50%);
-    color: #ccc;
-  }
-  
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Optional: Adds a shadow */
+}
+
+.task-popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  /* Or any width you prefer */
+  /* Or a percentage that suits your design */
+  margin: auto;
+  /* This will center the popup */
+}
+
+.task-popup-content select {
+  /* custom styles */
+  display: block;
+  width: 100%;
+  /* or a fixed width */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  /* For older versions of Safari */
+  color: #444;
+  font-family: inherit;
+  /* To match the font with other inputs */
+  padding: 10px;
+  /* Match the padding with other inputs */
+  border: 1px solid #ccc;
+  /* Similar to other inputs */
+  border-radius: 5px;
+  /* Match the border-radius */
+  background-color: white;
+  /* Or any color that matches your design */
+  cursor: pointer;
+  height: auto;
+  /* Adjust height or set a specific height if required */
+  margin-bottom: 10px;
+}
+
+/* Focus state for accessibility */
+input[type="date"]:focus {
+  outline: none;
+  /* Customizing focus state */
+  border-color: #0079FF;
+  /* Match your theme color or keep it subtle */
+  box-shadow: 0 0 0 2px rgba(0, 121, 255, 0.25);
+  /* Optional: Adds a glow effect */
+  margin-bottom: 10px;
+}
+
+.task-popup-content,
+.task-popup-content * {
+  box-sizing: border-box;
+}
+
+.close-popup {}
+
+
+.popup-content ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  /* Make it a flex container */
+  flex-wrap: wrap;
+  /* Allow items to wrap */
+  justify-content: flex-start;
+  /* Align items to the start */
+}
+
+.popup-content li {
+  padding: 8px;
+  margin-bottom: 5px;
+  flex: 0 0 calc(25% - 10px);
+  /* Adjust width to fit 4 items per row */
+  box-sizing: border-box;
+}
+
+.popup-content li:last-child {
+  border-bottom: none;
+  /* Removes the border from the last item */
+}
+
+
+/* Replace the close button with a back arrow */
+.close-popup {
+  background-color: #0079FF;
+  /* Blue background */
+  color: white;
+  /* White arrow color */
+  font-size: 16px;
+  /* Adjust size as needed */
+  border: none;
+  cursor: pointer;
+  margin-right: 350px;
+}
+
+/* Style for the popup title */
+.popup-title {
+  text-align: center;
+  /* Center the title */
+  color: #0079FF;
+  /* White text color */
+  background-color: white;
+  /* Blue background */
+  padding: 5px;
+  /* Adjust padding as needed */
+  font-size: 40px;
+  /* Adjust font size as needed */
+  margin-top: -50px;
+  /* Adjust according to your layout */
+  font-family: 'Segoe UI', sans-serif;
+  /* Specify Segoe UI as the font family */
+  font-weight: bold;
+  /* Make the font bold */
+}
+
+.user-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  /* Diameter of the circle */
+  height: 100px;
+  /* Diameter of the circle */
+  line-height: 100px;
+  /* Center the text vertically */
+  border-radius: 50%;
+  /* Makes the div circular */
+  color: white;
+  /* Text color */
+  text-align: center;
+  /* Center the text horizontally */
+  margin: 5px;
+  /* Space between circles */
+  font-size: 40px;
+  /* Adjust font size as needed */
+  font-family: 'Segoe UI', sans-serif;
+  /* Specify Segoe UI as the font family */
+  font-weight: bold;
+  /* Make the font bold */
+  position: relative;
+  /* Required for tooltip positioning */
+  cursor: pointer;
+  /* Change cursor to indicate hover state */
+  box-sizing: border-box;
+  /* Include padding and borders in width and height */
+
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 200px;
+  /* Adjust as needed */
+  background-color: white;
+  color: #0079FF;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  /* Position the tooltip above the circle */
+  left: -40%;
+  font-size: 14px;
+  /* Adjust font size as needed */
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.user-circle:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.email-input-container {
+  margin-top: 20px;
+  /* Add more space above the input */
+  padding-right: 40px;
+  margin-bottom: 1cqmax;
+}
+
+.email-input {
+  margin-top: 20px;
+  /* Increase gap */
+  border-radius: 10px;
+  /* Rounded corners */
+  padding-left: 35px !important;
+  /* Make space for icon, ensure it's applied */
+  background-image: url('./search.png');
+  /* Path to your search icon */
+  background-position: 10px center;
+  /* Position the icon */
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  /* Adjust icon size */
+  /* Rest of your input styling */
+}
+
+
+.email-icon {
+  position: absolute;
+  left: 10px;
+  /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
-import { getDocuments, getCurrentProject, deleteProject, addUserToProject, deleteTask } from '../firestoreService.js';
+import { getDocuments, getCurrentProject, deleteProject, addUserToProject, deleteTask, updateTaskStatus } from '../firestoreService.js';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/DocumentPage.css';
 import '../styles/Header.css';
@@ -55,6 +55,7 @@ const ProjectViewer = () => {
     try {
       const project = await getCurrentProject('Projects', projId);
       const userIds = project.get('users');
+      //console.log(userIds)
 
       if (userIds && userIds.length > 0) {
         fetchUserDetails(userIds);
@@ -66,19 +67,17 @@ const ProjectViewer = () => {
 
   const fetchUserDetails = async (userIds) => {
     const userDetails = [];
+    //console.log("Inside fetch user details: " + userIds)
 
     for (const userId of userIds) {
       try {
         const userRef = doc(firestore, 'users', userId);
         const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          userDetails.push({
-            email: userData.email,
-            color: userData.color // Assuming color is stored in the userData
-          });
-        }
+        const userData = userSnap.data();
+        userDetails.push({
+          email: userData.email,
+          color: userData.color // Assuming color is stored in the userData
+        });
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -124,6 +123,45 @@ const ProjectViewer = () => {
     }
   };
 
+  const handleStatusChange = (taskId) => {
+    // Define the next status in order for each current status
+    const nextStatus = {
+      'pending': 'in-progress',
+      'in-progress': 'complete',
+      'complete': 'pending',
+    };
+
+    // Get the current task's status
+    const currentStatus = tasks[taskId].status;
+
+    // Determine the next status
+    const newStatus = nextStatus[currentStatus.toLowerCase()];
+
+    // Update the task's status (you'll need to implement this part based on how you're managing state)
+    // For example, if you're using a state management library or context, dispatch an action here
+    console.log("Made it this far")
+    updateTaskStatus(projId, taskId, newStatus); // This is a placeholder function
+    setTasks(prevTasks => {
+      // Copy the previous tasks to a new object
+      const updatedTasks = { ...prevTasks };
+
+      // Update the status of the specific task
+      if (updatedTasks[taskId]) {
+        updatedTasks[taskId].status = newStatus;
+      }
+
+      // Return the updated tasks object to set the new state
+      return updatedTasks;
+    });
+  };
+
+  // You’ll also need to create the updateTaskStatus function that will update your state or database
+  // Here is a placeholder for it:
+
+
+
+  console.log(documents)
+
   return (
     <div className='logged-in'>
       <Header />
@@ -168,14 +206,23 @@ const ProjectViewer = () => {
         <div className="task-container">
           {Object.entries(tasks).map(([taskId, taskDetails]) => (
             <div key={taskId} className="task-card">
-              <h3>{taskDetails.name}</h3>
-              <p>Due: {taskDetails.due_date}</p>
-              <p>Status: {taskDetails.status}</p>
-              <p>Assigned To: {taskDetails.assignedTo}</p>
-              {/* Add a delete button to each task card */}
-              <button onClick={() => handleDeleteTask(taskId)} className="delete-task-button">
-                Delete Task
-              </button>
+              <div className="task-main-info">
+                <h3>{taskDetails.name}</h3>
+                <p className="task-due">Due: {taskDetails.due_date}</p>
+                <p className="task-assigned">Assigned to: <strong>{taskDetails.assignedTo}</strong></p>
+                <div className="task-status" onClick={() => handleStatusChange(taskId)}>
+                  <p className={`status ${taskDetails.status.toLowerCase()}`}>{taskDetails.status}</p>
+                </div>
+              </div>
+              <div>
+                <p>In document...</p>
+                <div className="task-card-in-document">
+                  {taskDetails.parent_doc}
+                </div>
+                <button onClick={() => handleDeleteTask(taskId)} className="delete-task-button">
+                  Delete Task
+                </button>
+              </div>
             </div>
           ))}
           {/* Preserve the existing Add task button */}
@@ -192,11 +239,12 @@ const ProjectViewer = () => {
               project={projId}
               onClose={toggleTasksPopup}
               users={projectUsers}
+              allDocs={documents}
             />
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

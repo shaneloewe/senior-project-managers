@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { addTask } from '../firestoreService';
 import { v4 as uuidv4 } from 'uuid'; // Ensure you have uuid installed: npm install uuid
+import '../styles/UserListPopup.css';
 
-const NewTaskPopup = ({ onClose, users }) => {
+const NewTaskPopup = ({ onClose, users, allDocs }) => {
   console.log(`Users: ${users}`)
+  console.log(`Documents: ${allDocs}`)
   const [taskInfo, setTaskInfo] = useState({
     assignedUser: '',
     taskName: '',
@@ -14,6 +16,12 @@ const NewTaskPopup = ({ onClose, users }) => {
   });
   const { projId } = useParams();
   const navigate = useNavigate();
+
+  if (allDocs.length == 0) {
+    console.log("Yo");
+    allDocs.push("Temp");
+    console.log(allDocs);
+  }
 
   const handleChange = (e) => {
     setTaskInfo({ ...taskInfo, [e.target.name]: e.target.value });
@@ -42,9 +50,15 @@ const NewTaskPopup = ({ onClose, users }) => {
 
   return (
     <div className="popup-overlay">
-      <div className="popup-content">
+      <div className="task-popup-content">
         <button onClick={onClose} className="close-popup">X</button>
-        <h1>New Task</h1>
+        <input
+          type="text"
+          name="taskName"
+          value={taskInfo.taskName}
+          onChange={handleChange}
+          placeholder="Enter task name"
+        />
         <select
           name="assignedUser"
           value={taskInfo.assignedUser}
@@ -57,13 +71,6 @@ const NewTaskPopup = ({ onClose, users }) => {
             </option>
           ))}
         </select>
-        <input
-          type="text"
-          name="taskName"
-          value={taskInfo.taskName}
-          onChange={handleChange}
-          placeholder="Enter task name"
-        />
         <input
           type="date"
           name="dueDate"
@@ -80,13 +87,18 @@ const NewTaskPopup = ({ onClose, users }) => {
           <option value="in-progress">In Progress</option>
           <option value="completed">Completed</option>
         </select>
-        <input
-          type="text"
+        <select
           name="parentDoc"
           value={taskInfo.parentDoc}
           onChange={handleChange}
-          placeholder="Enter Parent Document ID"
-        />
+        >
+          <option value="">Assign to Document</option>
+          {allDocs.map((document) => (
+            <option key={document.id} value={document.name}>
+              {document.name} {/* Assuming you want to display the email; adjust as needed */}
+            </option>
+          ))}
+        </select>
         <button onClick={handleSubmit}>Add Task</button>
       </div>
     </div>
