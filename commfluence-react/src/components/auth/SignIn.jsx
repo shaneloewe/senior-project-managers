@@ -49,7 +49,9 @@ const SignIn = ({ auth }) => {
                 </div>
                 <button type='submit'>Sign In</button>
             </form>
+            {error && <div className='auth-error-message'>{error}</div> {"Invalid email or password."}}
         </div>
+        
     );
 };
 
