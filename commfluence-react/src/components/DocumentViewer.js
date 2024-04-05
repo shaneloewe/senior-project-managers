@@ -76,6 +76,7 @@ In-text citations: ([Author] [Year])`,
 
   useEffect(() => {
     const fetchDocument = async () => {
+      console.log(`Documents: ${docId}`)
       const doc = await getDocument('documents', docId);
       if (doc) {
         setDocument(doc);

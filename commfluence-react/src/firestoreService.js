@@ -69,7 +69,8 @@ export const addProject = async (collectionName, projectName, currentUser) => {
   try {
     const docRef = await addDoc(collection(firestore, collectionName), {
       name: projectName,
-      users: [currentUser.uid]
+      users: [currentUser.uid],
+      tasks: {}
     });
     return docRef.id; // Return the ID of the newly added project document
   } catch (error) {
@@ -147,6 +148,18 @@ export const addUser = async (collectionName, data) => {
   }
 };
 
+export const getUsers = async (collectionName, projId) => {
+  try {
+    const docRef = doc(firestore, collectionName, projId);
+    const docSnap = await getDoc(docRef);
+    const users = docSnap.data().users; // Access the users field
+    console.log("Users baby: " + users)
+    return users; // Return the users array
+  } catch (error) {
+    console.error("Error getting documents: ", error);
+  }
+};
+
 const addUserToProject = async (email, projectId) => {
   try {
     // Step 1: Find user by email
@@ -176,3 +189,76 @@ const addUserToProject = async (email, projectId) => {
 };
 
 export { addUserToProject };
+
+// Add a new task
+export const addTask = async (projId, task) => {
+  try {
+    // Reference to the project document in the "projects" collection
+    const projRef = doc(firestore, "Projects", projId);
+    const projSnap = await getDoc(projRef);
+
+    console.log(projId)
+    console.log(projRef)
+    console.log(projSnap)
+    console.log(task)
+
+    let projectData = projSnap.data();
+    console.log(`Project Snap Data: ${projSnap.data()}`)
+    let tasks = projectData.tasks || {}; // Ensure tasks is an object if it doesn't exist
+
+    // Use the ID from the task object as the key for the new task
+    const taskId = task.id; // Assuming `id` is part of the task object
+
+    // Log for debugging
+    console.log(`Adding task to project ${projId}:`, task);
+
+    // Add the new task to the tasks dictionary
+    tasks[taskId] = task;
+
+    // Update the project document with the new tasks object
+    await updateDoc(projRef, {
+      tasks // Update the tasks field with the new tasks object
+    });
+
+    console.log("Task added successfully!");
+  } catch (error) {
+    console.error("Error adding task: ", error);
+    throw error;
+  }
+};
+
+// Function to delete a task from a project
+export const deleteTask = async (projId, taskId) => {
+  const projRef = doc(firestore, 'Projects', projId);
+  // Get the current project data
+  const projSnap = await getDoc(projRef);
+
+  if (projSnap.exists()) {
+    const projData = projSnap.data();
+    const tasks = projData.tasks || {};
+    // Remove the task from the tasks object
+    delete tasks[taskId];
+    // Update the project document without the deleted task
+    await updateDoc(projRef, { tasks });
+  } else {
+    console.error('Project document does not exist.');
+  }
+};
+
+export const updateTaskStatus = async (projId, taskId, newStatus) => {
+  // Reference the specific project document in Firestore
+  const projectRef = doc(firestore, 'Projects', projId);
+
+  // Prepare the update object to set the new status for the specific task
+  const statusUpdate = {
+    [`tasks.${taskId}.status`]: newStatus // This uses JavaScript computed property names
+  };
+
+  // Update the 'tasks' field within the project document
+  try {
+    await updateDoc(projectRef, statusUpdate);
+    console.log(`Task ${taskId} in project ${projId} updated to status: ${newStatus}`);
+  } catch (error) {
+    console.error("Error updating task status: ", error);
+  }
+};
