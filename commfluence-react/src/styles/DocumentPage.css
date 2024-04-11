@@ -1,368 +1,317 @@
 /* DocumentPage.css */
 
+/* Styles for the banner container */
 .banner-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* Adjust this as needed */
-  height: 90px;
-  /* Example height, adjust as needed */
-
-  /* Center items vertically */
+  height: 90px; /* Height of the banner container */
 }
 
+/* Styles for the back button */
 .back-button {
   color: white;
   font-weight: bold;
   font-size: 30px;
   position: relative;
   width: 100px;
-  height: 83px;
-  background-color: #0079FF;
+  height: 83px; /* Height of the back button */
+  background-color: #0079FF; /* Background color of the back button */
   display: flex;
   justify-content: center;
-  /* Center horizontally */
   align-items: center;
-  /* Center vertically */
   text-decoration: none;
-  padding-left: 0px;
-  /* Remove underline from anchor element */
+  padding-left: 0px; /* Padding for the back button */
 }
 
+/* Styles for the banner */
 .banner {
-  /* Expand to fill available space */
-  background-color: #0079FF;
-  /* Background color of the banner */
-  color: white;
-  /* Text color */
-  padding: 20px;
-  padding-left: 0px;
-  /* Adjust as needed */
-  margin: 0;
-  /* Remove default margin */
-  width: 64%;
+  background-color: #0079FF; /* Background color of the banner */
+  color: white; /* Text color of the banner */
+  padding: 20px; /* Padding for the banner */
+  padding-left: 0px; /* Additional padding for the banner */
+  width: 64%; /* Width of the banner */
 }
 
+/* Styles for the taskboard */
 .taskboard {
   flex: 1;
-  /* Expand to fill available space */
-  background-color: #0079FF;
-  /* Background color of the banner */
-  color: white;
-  /* Text color */
-  padding: 20px;
-  /* Adjust as needed */
-  margin: 0;
-  /* Remove default margin */
+  background-color: #0079FF; /* Background color of the taskboard */
+  color: white; /* Text color of the taskboard */
+  padding: 20px; /* Padding for the taskboard */
+  margin: 0; /* Margin for the taskboard */
 }
 
+/* Spacer between elements */
 .spacer {
-  width: 20px;
-  /* Adjust as needed to create desired separation */
+  width: 20px; /* Width of the spacer */
 }
 
+/* Styles for the page title */
 .page-title {
-  padding: 1rem;
-  margin-left: 84px;
-  width: 64%
+  padding: 1rem; /* Padding for the page title */
+  margin-left: 84px; /* Left margin for the page title */
+  width: 64%; /* Width of the page title */
 }
 
-body {
-  overflow-x: hidden;
-}
-
+/* Styles for the create document button */
 .create-document-button {
-  width: 212px;
-  /* 8.5 inches */
-  height: 275px;
-  /* 11 inches */
-  background-color: #777777;
-  /* Background color */
-  color: white;
-  /* Text color */
-  padding: 10px;
-  /* Adjust padding as needed */
-  border: none;
-  /* Remove border */
-  cursor: pointer;
-  /* Show pointer cursor on hover */
-  outline: none;
-  /* Remove default focus outline */
-  padding: 1rem;
-  margin-left: 40px;
-  font-size: 84pt;
-  transition: transform 0.3s ease;
+  width: 212px; /* Width of the create document button */
+  height: 275px; /* Height of the create document button */
+  background-color: #777777; /* Background color of the create document button */
+  color: white; /* Text color of the create document button */
+  padding: 10px; /* Padding for the create document button */
+  border: none; /* No border for the create document button */
+  cursor: pointer; /* Cursor style for the create document button */
+  outline: none; /* No outline for the create document button */
+  padding: 1rem; /* Additional padding for the create document button */
+  margin-left: 40px; /* Left margin for the create document button */
+  font-size: 84pt; /* Font size for the create document button */
+  transition: transform 0.3s ease; /* Transition effect for the create document button */
+  border-radius: 10px; /* Rounded corners for the create document button */
 }
 
+/* Hover effect for the create document button */
 .create-document-button:hover {
   transform: scale(1.04) translate(-0%, -0%);
-  /* Change background color on hover */
 }
 
+/* Styles for the grid container */
 .grid-container {
-  max-width: fit-content;
-  /* Set max width for the documents container */
-  margin: 0 auto;
-  /* Center the container horizontally */
-  display: flex;
-  /* Use flexbox for layout */
-  flex-wrap: wrap;
-  /* Allow items to wrap to the next line */
+  max-width: fit-content; /* Maximum width for the grid container */
+  margin: 0 auto; /* Center the grid container horizontally */
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
 }
 
+/* Styles for the grid items (document boxes) */
 .grid-item {
-  height: 275px;
-  width: 212px;
-  /* Set width for each document card with space between */
-  background-color: #0079FF;
-  /* Background color */
-  color: white;
-  /* Text color */
-  padding: 20px;
-  /* Adjust padding as needed */
-  margin-bottom: 40px;
-  /* Adjust margin between rows */
-  box-sizing: border-box;
-  /* Include padding and border in the element's total width and height */
-  text-align: left;
-  /* Center text horizontally */
-  padding: 1rem;
-  margin-left: 40px;
-  font-size: 200%;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+  height: 275px; /* Height of each grid item (document box) */
+  width: 212px; /* Width of each grid item (document box) */
+  background-color: #0079FF; /* Background color of each grid item (document box) */
+  color: white; /* Text color of each grid item (document box) */
+  padding: 20px; /* Padding for each grid item (document box) */
+  margin-bottom: 40px; /* Margin between each grid item (document box) */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  text-align: left; /* Text alignment for each grid item (document box) */
+  padding: 1rem; /* Additional padding for each grid item (document box) */
+  margin-left: 40px; /* Left margin for each grid item (document box) */
+  font-size: 200%; /* Font size for each grid item (document box) */
+  font-family: 'Times New Roman', Times, serif; /* Font family for each grid item (document box) */
+  font-weight: bold; /* Font weight for each grid item (document box) */
+  transition: transform 0.3s ease; /* Transition effect for each grid item (document box) */
+  cursor: pointer; /* Cursor style for each grid item (document box) */
+  border-radius: 10px; /* Rounded corners for each grid item (document box) */
 }
 
+/* Hover effect for grid items (document boxes) */
 .grid-item:hover {
   transform: scale(1.04) translate(-0%, -0%);
 }
 
+/* Additional styles for task cards */
 .task-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  background-color: #ffffff;
-  color: #0079FF;
-  padding: 20px;
-  margin: 10px;
-  text-align: left;
-  box-sizing: border-box;
-  border: 1px solid #777777;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between items */
+  align-items: flex-start; /* Align items at the start */
+  background-color: #ffffff; /* Background color for task cards */
+  color: #0079FF; /* Text color for task cards */
+  padding: 20px; /* Padding for task cards */
+  margin: 10px; /* Margin for task cards */
+  text-align: left; /* Text alignment for task cards */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  border: 1px solid #777777; /* Border for task cards */
 }
 
+/* Styles for task card titles */
 .task-main-info {
-  flex-grow: 1;
+  flex-grow: 1; /* Allow task card titles to grow */
 }
 
-.task-due,
-.task-assigned {
-  margin: 5px 0;
-  /* Adjust vertical spacing */
-}
-
+/* Styles for task statuses */
 .status {
-  padding: 5px 10px;
-  border-radius: 10px;
-  /* Adjust for rounded corners */
-  color: #fff;
-  /* Text color */
-  cursor: pointer;
+  padding: 5px 10px; /* Padding for task statuses */
+  border-radius: 10px; /* Rounded corners for task statuses */
+  color: #fff; /* Text color for task statuses */
+  cursor: pointer; /* Cursor style for task statuses */
 }
 
-.status.pending {
-  background-color: #ffffff;
-  border: 1px solid #777777;
-  border-radius: 999px;
-  padding: 5px 20px;
-  /* Adjust the padding to give some space inside the pill */
-  display: inline-block;
-  /* This will allow you to set padding and width */
-  text-align: center;
-}
-
+/* Styles for pending and in-progress statuses */
+.status.pending,
 .status.in-progress {
-  background-color: #ffffff;
-  border: 1px solid #777777;
-  border-radius: 999px;
-  padding: 5px 20px;
-  /* Adjust the padding to give some space inside the pill */
-  display: inline-block;
-  /* This will allow you to set padding and width */
-  text-align: center;
+  background-color: #ffffff; /* Background color for pending and in-progress statuses */
+  border: 1px solid #777777; /* Border for pending and in-progress statuses */
+  border-radius: 999px; /* Rounded corners for pending and in-progress statuses */
+  padding: 5px 20px; /* Padding for pending and in-progress statuses */
+  display: inline-block; /* Display as inline block */
+  text-align: center; /* Text alignment for pending and in-progress statuses */
 }
 
+/* Styles for completed statuses */
 .status.complete {
-  background-color: #0079FF;
-  border-radius: 999px;
-  padding: 5px 20px;
-  /* Adjust the padding to give some space inside the pill */
-  display: inline-block;
-  /* This will allow you to set padding and width */
-  text-align: center;
-  color: white;
+  background-color: #0079FF; /* Background color for completed statuses */
+  border-radius: 999px; /* Rounded corners for completed statuses */
+  padding: 5px 20px; /* Padding for completed statuses */
+  display: inline-block; /* Display as inline block */
+  text-align: center; /* Text alignment for completed statuses */
+  color: white; /* Text color for completed statuses */
 }
 
+/* Styles for delete task button */
 .delete-task-button {
-  padding: 5px 10px;
-  border: none;
-  background-color: #d9534f;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  align-self: flex-start;
-  margin-left: 0px;
+  padding: 5px 10px; /* Padding for delete task button */
+  border: none; /* No border for delete task button */
+  background-color: #d9534f; /* Background color for delete task button */
+  color: #fff; /* Text color for delete task button */
+  border-radius: 5px; /* Rounded corners for delete task button */
+  cursor: pointer; /* Cursor style for delete task button */
+  align-self: flex-start; /* Align delete task button to flex start */
+  margin-left: 0px; /* Left margin for delete task button */
 }
 
+/* Styles for document and delete container */
 .doc-and-delete-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between items */
+  align-items: flex-start; /* Align items at the start */
 }
 
-/* Add additional styling as needed */
-
+/* Styles for task card titles */
 .task-card h3 {
-  font-size: 150%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-family: 'Times New Roman', Times, serif;
+  font-size: 150%; /* Font size for task card titles */
+  margin-top: 5px; /* Top margin for task card titles */
+  margin-bottom: 5px; /* Bottom margin for task card titles */
+  font-family: 'Times New Roman', Times, serif; /* Font family for task card titles */
 }
 
+/* Styles for task card descriptions */
 .task-card p {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  color: #777777;
-  font-family: 'Times New Roman', Times, serif;
+  margin-top: 5px; /* Top margin for task card descriptions */
+  margin-bottom: 5px; /* Bottom margin for task card descriptions */
+  color: #777777; /* Text color for task card descriptions */
+  font-family: 'Times New Roman', Times, serif; /* Font family for task card descriptions */
 }
 
+/* Styles for task cards within documents */
 .task-card-in-document {
-  height: 92px;
-  width: 71px;
-  background-color: #0079FF;
-  color: white;
-  box-sizing: border-box;
-  text-align: left;
-  font-size: 100%;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  padding: 5px;
-  margin-bottom: 5px;
+  height: 92px; /* Height for task cards within documents */
+  width: 71px; /* Width for task cards within documents */
+  background-color: #0079FF; /* Background color for task cards within documents */
+  color: white; /* Text color for task cards within documents */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  text-align: left; /* Text alignment for task cards within documents */
+  font-size: 100%; /* Font size for task cards within documents */
+  font-family: 'Times New Roman', Times, serif; /* Font family for task cards within documents */
+  font-weight: bold; /* Font weight for task cards within documents */
+  transition: transform 0.3s ease; /* Transition effect for task cards within documents */
+  cursor: pointer; /* Cursor style for task cards within documents */
+  padding: 5px; /* Padding for task cards within documents */
+  margin-bottom: 5px; /* Bottom margin for task cards within documents */
 }
 
+/* Media query for smaller screens */
 @media (max-width: 1200px) {
   .task-card {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Change direction to column for smaller screens */
+    align-items: flex-start; /* Align items at the start for smaller screens */
   }
 }
 
+/* Styles for creating task cards */
 .create-task-card {
-  background-color: #777777;
-  color: white;
-  padding: 20px;
-  margin: 10px;
-  text-align: center;
-  width: 100%;
-  box-sizing: border-box;
+  background-color: #777777; /* Background color for creating task cards */
+  color: white; /* Text color for creating task cards */
+  padding: 20px; /* Padding for creating task cards */
+  margin: 10px; /* Margin for creating task cards */
+  text-align: center; /* Text alignment for creating task cards */
+  width: 100%; /* Width for creating task cards */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
+/* Styles for parent container */
 .parent-container {
-  margin: 1rem;
-  padding: 2rem 2rem;
-  display: grid;
-  grid-template-columns: 73% 27%;
-  grid-gap: 30px;
+  margin: 1rem; /* Margin for parent container */
+  padding: 2rem 2rem; /* Padding for parent container */
+  display: grid; /* Use grid for layout */
+  grid-template-columns: 73% 27%; /* Grid template columns */
+  grid-gap: 30px; /* Gap between grid items */
 }
 
-
+/* Styles for overlay */
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent black background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: fixed; /* Fixed position for overlay */
+  top: 0; /* Align overlay to top */
+  left: 0; /* Align overlay to left */
+  width: 100%; /* Full width for overlay */
+  height: 100%; /* Full height for overlay */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
 }
 
+/* Styles for popup */
 .popup {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white; /* Background color for popup */
+  padding: 20px; /* Padding for popup */
+  border-radius: 10px; /* Rounded corners for popup */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect for popup */
 }
 
+/* Styles for popup overlay */
 .popup-overlay {
-  position: fixed;
-  /* Overlay takes the whole screen */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Center the popup content */
+  position: fixed; /* Fixed position for popup overlay */
+  top: 0; /* Align popup overlay to top */
+  left: 0; /* Align popup overlay to left */
+  width: 100%; /* Full width for popup overlay */
+  height: 100%; /* Full height for popup overlay */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
 }
 
+/* Styles for popup content */
 .popup-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Optional: Adds a shadow */
+  background-color: white; /* Background color for popup content */
+  padding: 20px; /* Padding for popup content */
+  border-radius: 10px; /* Rounded corners for popup content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect for popup content */
 }
 
+/* Styles for closing popup */
 .close-popup {}
 
-
+/* Styles for opening popup button */
 .open-popup-button {
-  height: 100%;
-  /* Make the button's height equal to the banner container */
-  padding: 0;
-  /* Remove any padding that might increase the size */
-  display: flex;
-  /* To center the image inside the button */
-  align-items: center;
-  /* Vertical alignment */
-  border: none;
-  /* Optional: Removes the border */
-  background: none;
-  /* Optional: Removes the background */
+  height: 100%; /* Full height for opening popup button */
+  padding: 0; /* No padding for opening popup button */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center content vertically */
+  border: none; /* No border for opening popup button */
+  background: none; /* No background for opening popup button */
 }
 
+/* Styles for image in opening popup button */
 .open-popup-button img {
-  height: 90%;
-  object-fit: contain;
+  height: 90%; /* Height for image in opening popup button */
+  object-fit: contain; /* Ensure image fits container */
 }
 
+/* Styles for unordered list in popup content */
 .popup-content ul {
-  list-style-type: none;
-  /* Removes the default bullet points */
-  padding: 0;
-  /* Resets default padding */
+  list-style-type: none; /* No bullet points for unordered list */
+  padding: 0; /* No padding for unordered list */
 }
 
+/* Styles for list items in popup content */
 .popup-content li {
-  padding: 8px;
-  /* Adds some padding around each list item */
-  border-bottom: 1px solid #ccc;
-  /* Adds a light border to each item */
-  margin-bottom: 5px;
-  /* Adds some space between items */
+  padding: 8px; /* Padding for list items */
+  border-bottom: 1px solid #ccc; /* Bottom border for list items */
+  margin-bottom: 5px; /* Bottom margin for list items */
 }
 
+/* Styles for last list item in popup content */
 .popup-content li:last-child {
-  border-bottom: none;
-  /* Removes the border from the last item */
+  border-bottom: none; /* No bottom border for last list item */
 }
