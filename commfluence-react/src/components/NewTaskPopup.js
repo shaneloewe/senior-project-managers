@@ -4,7 +4,7 @@ import { addTask } from '../firestoreService';
 import { v4 as uuidv4 } from 'uuid'; // Ensure you have uuid installed: npm install uuid
 import '../styles/UserListPopup.css';
 
-const NewTaskPopup = ({ onClose, users, allDocs }) => {
+const NewTaskPopup = ({ onClose, users, allDocs, onAddNewTask }) => {
   console.log(`Users: ${users}`)
   console.log(`Documents: ${allDocs}`)
   const [taskInfo, setTaskInfo] = useState({
@@ -41,6 +41,7 @@ const NewTaskPopup = ({ onClose, users, allDocs }) => {
     try {
       // Call addTask with the projId and the newTask object
       await addTask(projId, newTask);
+      onAddNewTask(newTask); // Update parent component's state with the new task
       onClose(); // Close the popup after adding
       navigate(`/project/${projId}`); // Optionally navigate to the project page
     } catch (error) {
