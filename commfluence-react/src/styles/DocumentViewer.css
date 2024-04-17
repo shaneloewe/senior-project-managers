@@ -32,21 +32,54 @@ input[type="text"] {
     /* Set the height to 60% of the viewport height */
     position: relative;
     /* Set position to relative for height calculation */
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.ql-container {
+    /* Container might need to be a bit bigger to handle the padding */
+    height: calc(100% + 20px);
+    /* Adjust as necessary */
+    overflow: hidden;
+    /* To handle overflow due to padding */
 }
 
 /* Quill editor */
-.ql-editor {
+.ql-container .ql-editor {
     min-height: 0;
     /* Reset min-height */
-    width: 100%;
+    width: auto;
     /* Set width to 100% to fill the container */
     height: 100%;
     /* Set height to 100% to fill the container height */
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-family: 'Arial', sans-serif;
-    /* Set the desired font family */
+    border: none;
+    padding-top: 0;
+    margin: 0 auto;
 }
+
+.toolbar-container {
+    width: 100%;
+    /* Full width */
+    /* Rest of your styles for the toolbar */
+}
+
+.margin-sliders {
+    background: #f8f8f8;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    /* to ensure it stays on top */
+}
+
+.margin-sliders label {
+    margin-right: 20px;
+}
+
+.margin-sliders input[type='range'] {
+    width: 200px;
+    /* Adjust as necessary */
+}
+
 
 .button-container {
     margin-left: 40px;
