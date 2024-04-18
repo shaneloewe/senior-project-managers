@@ -8,7 +8,7 @@ function Help() {
     return (
         <div className="home-page">
             <Header />
-            <h2>FAQ</h2>
+            <h2>Frequently asked Questions</h2>
             <p className="Help-text">Welcome to the Help page for Commfluence!</p>
             <h3>Creating an Account:</h3>
             <p>To create an account:</p>
