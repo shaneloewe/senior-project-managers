@@ -128,6 +128,10 @@ In-text citations: ([Author] [Year])`,
         if (docData) {
           setCurrentDocument(docData);
           setDocumentName(docData.name);
+          // Check if margins are saved and set them
+          if (docData.margins) {
+            setMargins(docData.margins);
+          }
         } else {
           console.log("No such document!");
         }
@@ -188,7 +192,13 @@ In-text citations: ([Author] [Year])`,
     const content = quillInstance.current.getContents();
     const contentJSON = JSON.stringify(content);
 
-    await updateDocument('documents', docId, { name: documentName, content: contentJSON });
+    const docData = {
+      name: documentName,
+      content: contentJSON,
+      margins // assuming margins is an object like { top: 20, right: 20, bottom: 20, left: 20 }
+    };
+
+    await updateDocument('documents', docId, docData);
     console.log("Document updated");
   };
 
@@ -303,6 +313,30 @@ In-text citations: ([Author] [Year])`,
             value={margins.top}
             onChange={(e) => handleMarginChange(e, 'top')}
             title={`Current margin: ${margins.top / 96}in`}
+          />
+        </label>
+        <label>
+          Right Margin:
+          <input
+            type="range"
+            min="0"
+            max="96"
+            step="12" // This sets the slider to move in increments of 15
+            value={margins.right}
+            onChange={(e) => handleMarginChange(e, 'right')}
+            title={`Current margin: ${margins.right / 96}in`}
+          />
+        </label>
+        <label>
+          Bottom Margin:
+          <input
+            type="range"
+            min="0"
+            max="96"
+            step="12" // This sets the slider to move in increments of 15
+            value={margins.bottom}
+            onChange={(e) => handleMarginChange(e, 'bottom')}
+            title={`Current margin: ${margins.bottom / 96}in`}
           />
         </label>
       </div>
