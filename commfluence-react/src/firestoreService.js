@@ -1,5 +1,5 @@
 import { firestore, auth } from './firebase';
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where, setDoc, arrayUnion } from 'firebase/firestore';
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where, setDoc, arrayUnion, onSnapshot } from 'firebase/firestore';
 
 // Add a new document
 export const addDocument = async (collectionName, data) => {
@@ -41,17 +41,38 @@ export const getDocument = async (collectionName, docId) => {
     console.error("Error getting document: ", error);
   }
 };
+// Function to set up a real-time listener on a document
+export const onDocumentSnapshot = (collectionName, docId, callback) => {
+  // Creating a document reference
+  const docRef = doc(firestore, collectionName, docId);
+
+  // Setting up a real-time listener on the document
+  return onSnapshot(docRef, (doc) => {
+      if (doc.exists()) {
+          callback(null, { id: doc.id, ...doc.data() });
+      } else {
+          callback('No document found');
+      }
+  }, (error) => {
+      callback(error);
+  });
+};
 
 
-// Update a document
 export const updateDocument = async (collectionName, docId, data) => {
+  const docRef = doc(firestore, collectionName, docId);
+
+  console.log(`Attempting to update document: ${docId} in collection: ${collectionName}`);
+  console.log('Data to save:', data);
+
   try {
-    const docRef = doc(firestore, collectionName, docId);
     await updateDoc(docRef, data);
+    console.log('Document successfully updated');
   } catch (error) {
-    console.error("Error updating document: ", error);
+    console.error('Error updating document:', error);
   }
 };
+
 
 // Delete a document
 export const deleteDocument = async (collectionName, docId) => {

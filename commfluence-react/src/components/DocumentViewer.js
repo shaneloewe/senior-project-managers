@@ -3,16 +3,19 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import '../styles/DocumentViewer.css';
-import { getDocument, updateDocument, deleteDocument } from '../firestoreService';
+import { getDocument, updateDocument, deleteDocument, onDocumentSnapshot } from '../firestoreService';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import CustomPadding from './CustomPadding';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { firestore } from '../firebase';
 
 Quill.register('modules/customPadding', CustomPadding);
 
 const DocumentViewer = () => {
   const { projId, docId } = useParams();
   const [currentDocument, setCurrentDocument] = useState(null);
+  const [documentData, setDocumentData] = useState(null);
   const [documentName, setDocumentName] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState('Default'); // State for selected template
   const quillRef = useRef();
@@ -84,11 +87,8 @@ In-text citations: ([Author] [Year])`,
     // Add more templates and their text data as needed
   };
 
-
-
-  // Initialize Quill editor
   useEffect(() => {
-    if (!quillInstance.current && quillRef.current) {
+    if (quillRef.current && !quillInstance.current) {
       const toolbarOptions = [
         ['bold', 'italic', 'underline', 'strike'],
         ['blockquote', 'code-block'],
@@ -103,54 +103,68 @@ In-text citations: ([Author] [Year])`,
         [{ 'font': [] }],
         [{ 'align': [] }],
         ['clean']
-
       ];
       quillInstance.current = new Quill(quillRef.current, {
         theme: 'snow',
-        modules: {
-          toolbar: toolbarOptions,
-          customPadding: {
-            top: '0px',
-            right: '0px',
-            bottom: '0px',
-            left: '0px'
-          }
-        }
+        modules: { toolbar: toolbarOptions }
       });
     }
-  }, []); // Empty dependency array ensures this only runs once on component mount.
+  }, []);
 
-  // Fetch the document when docId changes
+  // Setup real-time subscription to Firestore document
   useEffect(() => {
-    const fetchDocumentData = async () => {
-      if (docId) {
-        const docData = await getDocument('documents', docId);
-        if (docData) {
-          setCurrentDocument(docData);
-          setDocumentName(docData.name);
+    if (docId) {
+      const docRef = doc(firestore, 'documents', docId);
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        if (doc.exists()) {
+          const data = doc.data();
+          setDocumentName(data.name);
+          if (quillInstance.current) {
+            const content = data.content ? JSON.parse(data.content) : '';
+            quillInstance.current.setContents(content);
+          }
         } else {
           console.log("No such document!");
         }
-      }
-    };
+      }, (error) => {
+        console.error("Failed to subscribe to document:", error);
+      });
 
-    fetchDocumentData();
-  }, [docId]); // Dependency on docId ensures this runs when docId changes.
+      return () => unsubscribe(); // Cleanup on unmount
+    }
+  }, [docId]);
+
+  // Optional: If you need to handle changes in Quill and update Firestore
+  useEffect(() => {
+    if (quillInstance.current) {
+      const handler = () => {
+        const updatedContent = JSON.stringify(quillInstance.current.getContents());
+        updateDocument('documents', docId, { content: updatedContent });
+      };
+      quillInstance.current.on('text-change', handler);
+      return () => {
+        quillInstance.current.off('text-change', handler);
+      };
+    }
+  }, [docId]);
+
+
+  
+
+  useEffect(() => {
+    const unsubscribe = onDocumentSnapshot('documents', docId, (error, data) => {
+      if (error) {
+        console.error(error);
+      } else {
+        setDocumentData(data);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [docId]);
+  
 
   // Update Quill editor content when document changes
-  useEffect(() => {
-    if (currentDocument && currentDocument.content && quillInstance.current) {
-      const contentDelta = JSON.parse(currentDocument.content);
-      quillInstance.current.setContents(contentDelta);
-    } else {
-      // Handle setting up the initial content/template if document is not set
-      const content = templateTextData[selectedTemplate];
-      if (quillInstance.current && content) {
-        quillInstance.current.clipboard.dangerouslyPasteHTML(0, content);
-      }
-    }
-  }, [currentDocument, selectedTemplate]); // Dependency on document and selectedTemplate.
-
   useEffect(() => {
     if (quillInstance.current) {
       const customPadding = quillInstance.current.getModule('customPadding');
@@ -197,9 +211,9 @@ In-text citations: ([Author] [Year])`,
     navigate(`/project/${projId}`);
   };
 
-  const handleTemplateChange = (event) => {
-    setSelectedTemplate(event.target.value);
-  };
+  ///const handleTemplateChange = (event) => {
+   /// setSelectedTemplate(event.target.value);
+ /// };
 
   // Function to get HTML content from the editor
   const getQuillContentAsHtml = () => {
@@ -261,7 +275,7 @@ In-text citations: ([Author] [Year])`,
         style={{ marginBottom: '10px', width: '100%', padding: '5px' }}
       />
       <div className="template-selector">
-        <select value={selectedTemplate} onChange={handleTemplateChange}>
+        <select value={selectedTemplate} >
           {templateOptions.map(option => (
             <option key={option.value} value={option.value}>{option.label}</option>
           ))}
