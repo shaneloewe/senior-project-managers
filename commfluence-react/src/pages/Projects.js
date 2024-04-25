@@ -93,9 +93,11 @@ const Projects = () => {
                 >
                     +
                 </button>
-                {showPopup && (
-                    <CreateProjectPopup onSave={handleSaveProject} onClose={handleClosePopup} />
-                )}
+                <div className="create-project-popup">
+                    {showPopup && (
+                        <CreateProjectPopup onSave={handleSaveProject} onClose={handleClosePopup} />
+                    )}
+                </div>
             </div>
         </div>
     );

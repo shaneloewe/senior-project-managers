@@ -105,3 +105,28 @@ body {
   /* Remove default margin */
   width: 54%;
 }
+
+.popup {
+  position: fixed;
+  /* Overlay takes the whole screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Center the popup content */
+}
+
+.popup-inner {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  /* Suitable max-width for popup content */
+}
