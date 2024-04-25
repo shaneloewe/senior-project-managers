@@ -138,6 +138,7 @@ export const addUser = async (collectionName, data) => {
     // Set the document with the provided data
     await setDoc(userRef, {
       ...data,
+      name: "",
       email: data.email // Since the UID is the document ID, no need to store it separately
     });
 
