@@ -1,0 +1,90 @@
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+ol,
+ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    /* Makes text more readable */
+}
+
+/* If you want to style the list numbers or bullets differently */
+ol li {
+    list-style-type: decimal;
+
+    /* Keeps the default number styling */
+}
+
+ul li {
+    list-style-type: disc;
+    /* Keeps the default bullet styling */
+}
+
+.help-text {
+    color: #777777;
+    text-align: left;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 1rem;
+    font-size: 20px;
+    opacity: 0;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
+}
+
+.help-text-2 {
+    color: #777777;
+    text-align: left;
+    margin-left: 180px;
+    margin-right: 150px;
+    padding: 1rem;
+    font-size: 20px;
+    opacity: 0;
+    animation: fadeInAnimation ease 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
+}
+
+/* For responsive design, you can add media queries */
+@media (max-width: 768px) {
+    .home-page {
+        padding: 10px;
+    }
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInAnimation_bodytext {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
