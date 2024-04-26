@@ -13,6 +13,7 @@ Quill.register('modules/customPadding', CustomPadding);
 const DocumentViewer = () => {
   const { projId, docId } = useParams();
   const [currentDocument, setCurrentDocument] = useState(null);
+  const [initDocument, setInitDocument] = useState(null);
   const [documentName, setDocumentName] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState('Default'); // State for selected template
   const quillRef = useRef();
@@ -127,6 +128,8 @@ In-text citations: ([Author] [Year])`,
         const docData = await getDocument('documents', docId);
         if (docData) {
           setCurrentDocument(docData);
+          setInitDocument(docData);
+          console.log(initDocument);
           setDocumentName(docData.name);
           // Check if margins are saved and set them
           if (docData.margins) {
@@ -188,18 +191,50 @@ In-text citations: ([Author] [Year])`,
     navigate(`/project/${projId}`);
   };
 
-  const handleSave = async () => {
-    const content = quillInstance.current.getContents();
-    const contentJSON = JSON.stringify(content);
+  function combineDeltas(delta1, delta2) {
+    const insert1 = delta1.ops[0].insert;
+    const insert2 = delta2.ops[0].insert;
+    console.log(`insert1: ${insert1}, insert2: ${insert2}`);
 
-    const docData = {
-      name: documentName,
-      content: contentJSON,
-      margins // assuming margins is an object like { top: 20, right: 20, bottom: 20, left: 20 }
+    const combinedInsert = insert1.trim() + '\n' + insert2.trim() + '\n';
+
+    const combinedDelta = {
+      ops: [{ insert: combinedInsert }]
     };
 
-    await updateDocument('documents', docId, docData);
-    console.log("Document updated");
+    return JSON.stringify(combinedDelta);
+  }
+
+  const handleSave = async () => {
+    const theDocInTheDatabaseRightNow = await getDocument('documents', docId);
+    const content = quillInstance.current.getContents();
+    const contentJSON = JSON.stringify(content);
+    console.log(contentJSON);
+
+    if (theDocInTheDatabaseRightNow.content == initDocument.content) {
+      const docData = {
+        name: documentName,
+        content: contentJSON,
+        margins // assuming margins is an object like { top: 20, right: 20, bottom: 20, left: 20 }
+      };
+
+      await updateDocument('documents', docId, docData);
+      console.log("Document updated");
+    } else {
+      console.log(`Initial Doc: ${initDocument.content} What's in the Database: ${theDocInTheDatabaseRightNow.content}`);
+      console.log("Someone updated the document while you were working.");
+      const contentJSON_parsed = JSON.parse(contentJSON);
+      const theDocInTheDatabaseRightNow_parsed = JSON.parse(theDocInTheDatabaseRightNow.content);
+      console.log(theDocInTheDatabaseRightNow_parsed.ops);
+      const combinedContentJSON = combineDeltas(contentJSON_parsed, theDocInTheDatabaseRightNow_parsed);
+      const docData = {
+        name: documentName,
+        content: combinedContentJSON,
+      };
+
+      await updateDocument('documents', docId, docData);
+      console.log("Document updated with combined data.");
+    };
   };
 
   const saveAndExit = async () => {
