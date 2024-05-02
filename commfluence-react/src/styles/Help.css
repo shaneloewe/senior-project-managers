@@ -1,26 +1,4 @@
-h2 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-h3 {
-    color: #333;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-ol,
-ul {
-    padding-left: 20px;
-    margin-bottom: 20px;
-}
-
-li {
-    margin-bottom: 10px;
-    line-height: 1.6;
-    /* Makes text more readable */
-}
+Makes text more readable */
 
 /* If you want to style the list numbers or bullets differently */
 ol li {
